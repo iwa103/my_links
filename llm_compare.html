@@ -148,22 +148,24 @@ document.querySelectorAll('input').forEach(el=>{
     el.addEventListener('change', filterTable);
 });
 
-// ===== total列を動的取得してソート =====
+// ===== 修正：表示行のみTotalでソート =====
 function sortByTotal(){
     const table = document.getElementById("dataTable");
     const tbody = table.tBodies[0];
-    const rows = Array.from(tbody.rows);
+    const allRows = Array.from(tbody.rows);
 
     const headers = Array.from(table.tHead.rows[0].cells);
     const totalIndex = headers.findIndex(th => th.textContent.trim() === "total");
 
-    rows.sort((a,b)=>{
+    const visibleRows = allRows.filter(r => r.style.display !== "none");
+
+    visibleRows.sort((a,b)=>{
         const aVal = parseFloat(a.cells[totalIndex].textContent) || 0;
         const bVal = parseFloat(b.cells[totalIndex].textContent) || 0;
         return bVal - aVal;
     });
 
-    rows.forEach(r => tbody.appendChild(r));
+    visibleRows.forEach(r => tbody.appendChild(r));
 }
 
 // ===== CSVダウンロード（BOM付きUTF-8）=====
