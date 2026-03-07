@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_74574e3c0ecc8519c7203498ad0d588e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_74574e3c0ecc8519c7203498ad0d588e" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_74574e3c0ecc8519c7203498ad0d588e = L.map(
+                "map_74574e3c0ecc8519c7203498ad0d588e",
+                {
+                    center: [33.7, 133.7],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 8,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a0dda9adc2e3cf80ee87c90ea8dd8cc1 = L.tileLayer(
+                "https://mt1.google.com/vt/lyrs=r\u0026x={x}\u0026y={y}\u0026z={z}",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "Google Maps",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_a0dda9adc2e3cf80ee87c90ea8dd8cc1.addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var marker_8415a38d8994fdcc3e4fee2c77aae17f = L.marker(
+                [33.560291289872836, 133.54371213672806],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_6e6c42155d942d886deeaa48a5b99f40 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d6e370f2651af6b9846378dacdafd9f0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ba7036e9d15e549900ba027362871282 = $(`<div id="html_ba7036e9d15e549900ba027362871282" style="width: 100.0%; height: 100.0%;">     <b>一風</b><br>     高知県高知市はりまや町1-6-1<br>     シーン：フォーマル（個室）<br>     常連で使う落ち着いた店。個室中心で接待向き。<br>     <a href="http://www.ipphu.com/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_d6e370f2651af6b9846378dacdafd9f0.setContent(html_ba7036e9d15e549900ba027362871282);
+            
+        
+
+        marker_8415a38d8994fdcc3e4fee2c77aae17f.bindPopup(popup_d6e370f2651af6b9846378dacdafd9f0)
+        ;
+
+        
+    
+    
+            marker_8415a38d8994fdcc3e4fee2c77aae17f.bindTooltip(
+                `<div>
+                     一風
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8415a38d8994fdcc3e4fee2c77aae17f.setIcon(icon_6e6c42155d942d886deeaa48a5b99f40);
+            
+    
+            var marker_7809bbd4122f84d9482ceb7118298874 = L.marker(
+                [33.56181467451537, 133.5403795208456],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_e9e27f8109c219d7a4a854b46d2b86ec = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2a938d70832da720c27e731601320f91 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ff00b7d336ae6777827ecbbfef2d8167 = $(`<div id="html_ff00b7d336ae6777827ecbbfef2d8167" style="width: 100.0%; height: 100.0%;">     <b>土佐っ子</b><br>     高知県高知市追手筋1-5-9<br>     シーン：フォーマル（個室）<br>     個室あり・静かめ。接待やフォーマル会食向き。<br>     <a href="http://www.tosakko.co.jp/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_2a938d70832da720c27e731601320f91.setContent(html_ff00b7d336ae6777827ecbbfef2d8167);
+            
+        
+
+        marker_7809bbd4122f84d9482ceb7118298874.bindPopup(popup_2a938d70832da720c27e731601320f91)
+        ;
+
+        
+    
+    
+            marker_7809bbd4122f84d9482ceb7118298874.bindTooltip(
+                `<div>
+                     土佐っ子
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7809bbd4122f84d9482ceb7118298874.setIcon(icon_e9e27f8109c219d7a4a854b46d2b86ec);
+            
+    
+            var marker_1767abf5b52f108cffa6b965c455424a = L.marker(
+                [33.562773135277205, 133.54212145337996],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_e5b9a71cfe5e90ae0ad2111c890e63f8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_db753b14c8d43ac0d7ea2d8b3bd47b19 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f3df93b6f1969dd314c3ac2a28def5db = $(`<div id="html_f3df93b6f1969dd314c3ac2a28def5db" style="width: 100.0%; height: 100.0%;">     <b>浪漫亭</b><br>     高知県高知市追手筋1-3-23<br>     シーン：フォーマル（個室）<br>     落ち着いた雰囲気。会食・接待でよく使える。<br>     <a href="https://syusai-romantei.jp/index_ko.html" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_db753b14c8d43ac0d7ea2d8b3bd47b19.setContent(html_f3df93b6f1969dd314c3ac2a28def5db);
+            
+        
+
+        marker_1767abf5b52f108cffa6b965c455424a.bindPopup(popup_db753b14c8d43ac0d7ea2d8b3bd47b19)
+        ;
+
+        
+    
+    
+            marker_1767abf5b52f108cffa6b965c455424a.bindTooltip(
+                `<div>
+                     浪漫亭
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1767abf5b52f108cffa6b965c455424a.setIcon(icon_e5b9a71cfe5e90ae0ad2111c890e63f8);
+            
+    
+            var marker_621c08886f67ac40bf08cb4a5d694cc4 = L.marker(
+                [33.5632385249433, 133.5406269073526],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_ba6c5f19f2549af9a9145b733e3b4b4b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e8a0501923c141c24c1ad5bd39486c74 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_da35c825827f2f49cbe27303b5b1a682 = $(`<div id="html_da35c825827f2f49cbe27303b5b1a682" style="width: 100.0%; height: 100.0%;">     <b>藤のや</b><br>     高知県高知市廿代町4-5<br>     シーン：カジュアル<br>     カツオが特に美味しい。雑多な感じOK。<br>     <a href="https://fujinoya-kochi.com/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_e8a0501923c141c24c1ad5bd39486c74.setContent(html_da35c825827f2f49cbe27303b5b1a682);
+            
+        
+
+        marker_621c08886f67ac40bf08cb4a5d694cc4.bindPopup(popup_e8a0501923c141c24c1ad5bd39486c74)
+        ;
+
+        
+    
+    
+            marker_621c08886f67ac40bf08cb4a5d694cc4.bindTooltip(
+                `<div>
+                     藤のや
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_621c08886f67ac40bf08cb4a5d694cc4.setIcon(icon_ba6c5f19f2549af9a9145b733e3b4b4b);
+            
+    
+            var marker_1867bbf45992bd622ec19354e950c7f8 = L.marker(
+                [33.561814357400806, 133.54355606687312],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_fbb0575f82af8c6c89a8480bf71f5d76 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_904307889eecef3207929cd664e7a6e9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0d3f6f6deadea9c17fbae00745d59c84 = $(`<div id="html_0d3f6f6deadea9c17fbae00745d59c84" style="width: 100.0%; height: 100.0%;">     <b>すごろく（寿司）</b><br>     高知県高知市はりまや町2-4-11<br>     シーン：カジュアル<br>     カツオが美味しい寿司屋。気軽め。<br>     <a href="https://kochike.jp/column/7894/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_904307889eecef3207929cd664e7a6e9.setContent(html_0d3f6f6deadea9c17fbae00745d59c84);
+            
+        
+
+        marker_1867bbf45992bd622ec19354e950c7f8.bindPopup(popup_904307889eecef3207929cd664e7a6e9)
+        ;
+
+        
+    
+    
+            marker_1867bbf45992bd622ec19354e950c7f8.bindTooltip(
+                `<div>
+                     すごろく（寿司）
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1867bbf45992bd622ec19354e950c7f8.setIcon(icon_fbb0575f82af8c6c89a8480bf71f5d76);
+            
+    
+            var marker_b3e75bbabde5de66628c86d83adae3ce = L.marker(
+                [33.55911564585131, 133.5437631226947],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_fd9bf236483b1d15e1e377611d403377 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_05b4be3c810b3f8d76d542d42d293d91 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9245ff4c685ce68840b7d31b0e98b46c = $(`<div id="html_9245ff4c685ce68840b7d31b0e98b46c" style="width: 100.0%; height: 100.0%;">     <b>酔鯨亭</b><br>     高知県高知市南はりまや町1-17-25<br>     シーン：カジュアル／日本酒好き向け<br>     酔鯨の直営店。地酒（日本酒）が強い。<br>     <a href="https://www.suigeitei.com/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_05b4be3c810b3f8d76d542d42d293d91.setContent(html_9245ff4c685ce68840b7d31b0e98b46c);
+            
+        
+
+        marker_b3e75bbabde5de66628c86d83adae3ce.bindPopup(popup_05b4be3c810b3f8d76d542d42d293d91)
+        ;
+
+        
+    
+    
+            marker_b3e75bbabde5de66628c86d83adae3ce.bindTooltip(
+                `<div>
+                     酔鯨亭
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b3e75bbabde5de66628c86d83adae3ce.setIcon(icon_fd9bf236483b1d15e1e377611d403377);
+            
+    
+            var marker_d96c08fef9414e26016dfdf3f88a4971 = L.marker(
+                [33.56231823269928, 133.54389093816704],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_91fcbd93313e4a69b0bbd2d03042b468 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_42ac03c33a46253bcfebfde8b21a26b2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2f6ba82e8269032423eb9b4876201b00 = $(`<div id="html_2f6ba82e8269032423eb9b4876201b00" style="width: 100.0%; height: 100.0%;">     <b>たちばな</b><br>     高知県高知市はりまや町2-3-8<br>     シーン：一般（こだわらない）<br>     土佐料理にこだわらない時に使いやすい居酒屋。<br>     <a href="https://bu-sanblog.website/tatibana-kochi/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_42ac03c33a46253bcfebfde8b21a26b2.setContent(html_2f6ba82e8269032423eb9b4876201b00);
+            
+        
+
+        marker_d96c08fef9414e26016dfdf3f88a4971.bindPopup(popup_42ac03c33a46253bcfebfde8b21a26b2)
+        ;
+
+        
+    
+    
+            marker_d96c08fef9414e26016dfdf3f88a4971.bindTooltip(
+                `<div>
+                     たちばな
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d96c08fef9414e26016dfdf3f88a4971.setIcon(icon_91fcbd93313e4a69b0bbd2d03042b468);
+            
+    
+            var marker_b5a25794a26f438c5d4ca91c2dccd160 = L.marker(
+                [33.56123107781678, 133.5414036515305],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_941afcaa059f0fe8663515ad74759546 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_119640641b3d91136bc8a7812dbade7d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_810fb9d16b79d4c1fe3aa1ae840930c1 = $(`<div id="html_810fb9d16b79d4c1fe3aa1ae840930c1" style="width: 100.0%; height: 100.0%;">     <b>アモンティラード</b><br>     高知県高知市帯屋町1-5-2<br>     シーン：一般（こだわらない）<br>     アイリッシュパブ<br>     <a href="https://irishpub-amontillado.owst.jp/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_119640641b3d91136bc8a7812dbade7d.setContent(html_810fb9d16b79d4c1fe3aa1ae840930c1);
+            
+        
+
+        marker_b5a25794a26f438c5d4ca91c2dccd160.bindPopup(popup_119640641b3d91136bc8a7812dbade7d)
+        ;
+
+        
+    
+    
+            marker_b5a25794a26f438c5d4ca91c2dccd160.bindTooltip(
+                `<div>
+                     アモンティラード
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b5a25794a26f438c5d4ca91c2dccd160.setIcon(icon_941afcaa059f0fe8663515ad74759546);
+            
+    
+            var marker_d57ebb41a1c62de47b59a02fbd61714a = L.marker(
+                [33.56003491376851, 133.53989106872257],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_bbca1b9ac2fd5ed3cd50373479871863 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6c44b49f2929fbd726d23156b331f19e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2dbdb12bc456ff559c999786610bb764 = $(`<div id="html_2dbdb12bc456ff559c999786610bb764" style="width: 100.0%; height: 100.0%;">     <b>フライシュケーニッヒ</b><br>     高知県高知市本町1-1-13 パークサイドテラス4F<br>     シーン：一般（こだわらない／肉系）<br>     肉料理系。雰囲気はカジュアル寄り。<br>     <a href="https://ameblo.jp/nondakurenohate/entry-12696015810.html" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_6c44b49f2929fbd726d23156b331f19e.setContent(html_2dbdb12bc456ff559c999786610bb764);
+            
+        
+
+        marker_d57ebb41a1c62de47b59a02fbd61714a.bindPopup(popup_6c44b49f2929fbd726d23156b331f19e)
+        ;
+
+        
+    
+    
+            marker_d57ebb41a1c62de47b59a02fbd61714a.bindTooltip(
+                `<div>
+                     フライシュケーニッヒ
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d57ebb41a1c62de47b59a02fbd61714a.setIcon(icon_bbca1b9ac2fd5ed3cd50373479871863);
+            
+    
+            var marker_78d9b10544e3627b01731bb96382ff13 = L.marker(
+                [33.56247437677625, 133.54438160920196],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_59ccedabf1b163353c52f24cdca52f30 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_46af046fee594a4937345972f73fa7a7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_910ceff6617b035e967eb8b87afe3c54 = $(`<div id="html_910ceff6617b035e967eb8b87afe3c54" style="width: 100.0%; height: 100.0%;">     <b>一柳（フレンチ）</b><br>     高知県高知市はりまや町3-5-16 ROCOビル1F<br>     シーン：一般（こだわらない／フレンチ）<br>     フレンチ系で選ぶ場合に。雰囲気はややフォーマル。<br>     <a href="https://kochike.jp/column/128760/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_46af046fee594a4937345972f73fa7a7.setContent(html_910ceff6617b035e967eb8b87afe3c54);
+            
+        
+
+        marker_78d9b10544e3627b01731bb96382ff13.bindPopup(popup_46af046fee594a4937345972f73fa7a7)
+        ;
+
+        
+    
+    
+            marker_78d9b10544e3627b01731bb96382ff13.bindTooltip(
+                `<div>
+                     一柳（フレンチ）
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_78d9b10544e3627b01731bb96382ff13.setIcon(icon_59ccedabf1b163353c52f24cdca52f30);
+            
+    
+            var marker_f6261eb376a37df719d3d261c8a69ac8 = L.marker(
+                [33.56213459665991, 133.54401682855675],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_868a5783bdc2f66134c75b28d3a719ae = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_501a55ef668935c78672099683e3b166 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8615acacd8a712f9484f472ebfd6f89d = $(`<div id="html_8615acacd8a712f9484f472ebfd6f89d" style="width: 100.0%; height: 100.0%;">     <b>いまどき安兵衛（餃子）</b><br>     高知県高知市はりまや町２丁目７−６<br>     シーン：B級<br>     餃子の名店。『いまどき安兵衛』は店舗型。予約不可。<br>     <a href="https://mfc-group.jp/yasube/shop.html" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_501a55ef668935c78672099683e3b166.setContent(html_8615acacd8a712f9484f472ebfd6f89d);
+            
+        
+
+        marker_f6261eb376a37df719d3d261c8a69ac8.bindPopup(popup_501a55ef668935c78672099683e3b166)
+        ;
+
+        
+    
+    
+            marker_f6261eb376a37df719d3d261c8a69ac8.bindTooltip(
+                `<div>
+                     いまどき安兵衛（餃子）
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f6261eb376a37df719d3d261c8a69ac8.setIcon(icon_868a5783bdc2f66134c75b28d3a719ae);
+            
+    
+            var marker_434bcd3907c66d201461ebed46c60ccf = L.marker(
+                [33.56341047111897, 133.54096341515583],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_3591125d7b3ba1e5e7a14966a7917ab7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ea20168769d36ef293646b19f35bc433 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ef1f46d2afd1c48b96333d78da3c0adc = $(`<div id="html_ef1f46d2afd1c48b96333d78da3c0adc" style="width: 100.0%; height: 100.0%;">     <b>屋台安兵衛</b><br>     高知県高知市廿代町４−１９<br>     シーン：B級<br>     餃子の名店。『いまどき安兵衛』は店舗型。予約不可。<br>     <a href="https://mfc-group.jp/yasube/shop.html" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_ea20168769d36ef293646b19f35bc433.setContent(html_ef1f46d2afd1c48b96333d78da3c0adc);
+            
+        
+
+        marker_434bcd3907c66d201461ebed46c60ccf.bindPopup(popup_ea20168769d36ef293646b19f35bc433)
+        ;
+
+        
+    
+    
+            marker_434bcd3907c66d201461ebed46c60ccf.bindTooltip(
+                `<div>
+                     屋台安兵衛
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_434bcd3907c66d201461ebed46c60ccf.setIcon(icon_3591125d7b3ba1e5e7a14966a7917ab7);
+            
+    
+            var marker_331902170fd17a9e86af1518d75fca37 = L.marker(
+                [33.560391640693574, 133.54355115707895],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_38aab69ae8afdb19bd06b5bd35546f71 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ae64b5ee0a9fe871b46f794a4e66511c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_db1d86aeeee3fa7f91a834aa366bf6e9 = $(`<div id="html_db1d86aeeee3fa7f91a834aa366bf6e9" style="width: 100.0%; height: 100.0%;">     <b>弐階屋（もつ焼き）</b><br>     高知県高知市はりまや町1-4-22 川崎ビル2F<br>     シーン：B級<br>     もつ焼き。気軽な飲みの場向け。<br>     <a href="https://www.youtube.com/watch?v=vwyi80ytkVA" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_ae64b5ee0a9fe871b46f794a4e66511c.setContent(html_db1d86aeeee3fa7f91a834aa366bf6e9);
+            
+        
+
+        marker_331902170fd17a9e86af1518d75fca37.bindPopup(popup_ae64b5ee0a9fe871b46f794a4e66511c)
+        ;
+
+        
+    
+    
+            marker_331902170fd17a9e86af1518d75fca37.bindTooltip(
+                `<div>
+                     弐階屋（もつ焼き）
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_331902170fd17a9e86af1518d75fca37.setIcon(icon_38aab69ae8afdb19bd06b5bd35546f71);
+            
+    
+            var marker_85f007cec639e59336e686f3df609703 = L.marker(
+                [33.55797662351313, 133.54647343803745],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_aca19c58cfb87fe42f29beddf0b4ba19 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_93af4ef1b75f42d07d9551aa704dbf29 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d05d70a788d9e882dce28e2c23c32f1b = $(`<div id="html_d05d70a788d9e882dce28e2c23c32f1b" style="width: 100.0%; height: 100.0%;">     <b>にこみちゃん（もつ焼き）</b><br>     高知県高知市南はりまや町2-14-10<br>     シーン：B級<br>     当日電話予約のみ。雑多で楽しい系の店。<br>     <a href="https://sbh.co.jp/blog/2016/05/24/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_93af4ef1b75f42d07d9551aa704dbf29.setContent(html_d05d70a788d9e882dce28e2c23c32f1b);
+            
+        
+
+        marker_85f007cec639e59336e686f3df609703.bindPopup(popup_93af4ef1b75f42d07d9551aa704dbf29)
+        ;
+
+        
+    
+    
+            marker_85f007cec639e59336e686f3df609703.bindTooltip(
+                `<div>
+                     にこみちゃん（もつ焼き）
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_85f007cec639e59336e686f3df609703.setIcon(icon_aca19c58cfb87fe42f29beddf0b4ba19);
+            
+    
+            var marker_82617e77f9fad78cf354f1decc733eee = L.marker(
+                [33.55990323724388, 133.54448983803744],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_5e9d8ab9644acbfbd85586e55343b801 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9097dee6ad3c6f762827f923134a069b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_172bcf7c9deffdfae1a4a50b6ab38fd4 = $(`<div id="html_172bcf7c9deffdfae1a4a50b6ab38fd4" style="width: 100.0%; height: 100.0%;">     <b>ゆいんち</b><br>     高知県高知市はりまや町1-5-20 オーシャンビル1F南<br>     シーン：高級<br>     隠れた名店。落ち着いた高級路線。<br>     <a href="https://yuinchi-kochi.net/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_9097dee6ad3c6f762827f923134a069b.setContent(html_172bcf7c9deffdfae1a4a50b6ab38fd4);
+            
+        
+
+        marker_82617e77f9fad78cf354f1decc733eee.bindPopup(popup_9097dee6ad3c6f762827f923134a069b)
+        ;
+
+        
+    
+    
+            marker_82617e77f9fad78cf354f1decc733eee.bindTooltip(
+                `<div>
+                     ゆいんち
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_82617e77f9fad78cf354f1decc733eee.setIcon(icon_5e9d8ab9644acbfbd85586e55343b801);
+            
+    
+            var marker_d05c4daef41823ba44c5b1ff70130abb = L.marker(
+                [33.5596408528736, 133.54041782323495],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_e0e1bac578882ddbfb5b46b20857c23c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9a80c82d207e35647bf6e7e4a13f1614 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3b91c02794b592d18bb5cf03c27683d7 = $(`<div id="html_3b91c02794b592d18bb5cf03c27683d7" style="width: 100.0%; height: 100.0%;">     <b>葉牡丹</b><br>     高知県高知市堺町2-21 <br>     シーン：フォーマル／カジュアル<br>     もう観光客にも有名になってしまったと思います。私が学生の時は、市街地の居酒屋にしては学生に優しい（安くておいしい）、という印象でした。<br>     <a href="https://habotan.jp/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_9a80c82d207e35647bf6e7e4a13f1614.setContent(html_3b91c02794b592d18bb5cf03c27683d7);
+            
+        
+
+        marker_d05c4daef41823ba44c5b1ff70130abb.bindPopup(popup_9a80c82d207e35647bf6e7e4a13f1614)
+        ;
+
+        
+    
+    
+            marker_d05c4daef41823ba44c5b1ff70130abb.bindTooltip(
+                `<div>
+                     葉牡丹
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d05c4daef41823ba44c5b1ff70130abb.setIcon(icon_e0e1bac578882ddbfb5b46b20857c23c);
+            
+    
+            var marker_ec87d3b413b73abb327eeccb7141cef6 = L.marker(
+                [33.5614268267977, 133.54276259624882],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_58064442cd2cde6c8b41d374e74ec059 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4936166d65ceb1e93fc70e1ffc5b0b78 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_beb76b4ee48a381d7caf4484e49fd55d = $(`<div id="html_beb76b4ee48a381d7caf4484e49fd55d" style="width: 100.0%; height: 100.0%;">     <b>酒亭どんこ</b><br>     高知県高知市はりまや町2-1-21 <br>     シーン：フォーマル（海鮮重視）<br>     地元の友人が高知に来た時にふらっと入ったらめちゃくちゃおいしかった。というものです。<br>     <a href="https://maps.app.goo.gl/p1Cy8YXfAuYFiRJP9" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_4936166d65ceb1e93fc70e1ffc5b0b78.setContent(html_beb76b4ee48a381d7caf4484e49fd55d);
+            
+        
+
+        marker_ec87d3b413b73abb327eeccb7141cef6.bindPopup(popup_4936166d65ceb1e93fc70e1ffc5b0b78)
+        ;
+
+        
+    
+    
+            marker_ec87d3b413b73abb327eeccb7141cef6.bindTooltip(
+                `<div>
+                     酒亭どんこ
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ec87d3b413b73abb327eeccb7141cef6.setIcon(icon_58064442cd2cde6c8b41d374e74ec059);
+            
+    
+            var marker_ed7d26bfe694b583b85b29a7ed7db872 = L.marker(
+                [33.56324445488352, 133.54072282639396],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_6623e98dc6b6f5fba4fc48185b18113f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e0bfe84556ab9456c87b0b50e3339622 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5e73cd0a738df546f11f1800a47fb587 = $(`<div id="html_5e73cd0a738df546f11f1800a47fb587" style="width: 100.0%; height: 100.0%;">     <b>十刻</b><br>     高知県高知市廿代町4-6 <br>     シーン：カジュアル<br>     バイト先の飲み会で時々使ってました。なんでもおいしいです。<br>     <a href="https://maps.app.goo.gl/mbVagkHwx7uudQar5" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_e0bfe84556ab9456c87b0b50e3339622.setContent(html_5e73cd0a738df546f11f1800a47fb587);
+            
+        
+
+        marker_ed7d26bfe694b583b85b29a7ed7db872.bindPopup(popup_e0bfe84556ab9456c87b0b50e3339622)
+        ;
+
+        
+    
+    
+            marker_ed7d26bfe694b583b85b29a7ed7db872.bindTooltip(
+                `<div>
+                     十刻
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ed7d26bfe694b583b85b29a7ed7db872.setIcon(icon_6623e98dc6b6f5fba4fc48185b18113f);
+            
+    
+            var marker_b1c5f06c8441ee1cfa7b3835b71d253a = L.marker(
+                [33.565109842514985, 133.54612882976693],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_e779a4b9013031e80b6710a278003094 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_32c29d8e180ab2af00a707611284be71 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ea2e013fa650e79284f284b21c7929b5 = $(`<div id="html_ea2e013fa650e79284f284b21c7929b5" style="width: 100.0%; height: 100.0%;">     <b>利他食堂</b><br>     高知県高知市相生町２−２０<br>     シーン：カジュアル<br>     ここもバイト先の飲み会で使ってました。<br>     <a href="https://maps.app.goo.gl/c5FQoNa3JzMSwoe46" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_32c29d8e180ab2af00a707611284be71.setContent(html_ea2e013fa650e79284f284b21c7929b5);
+            
+        
+
+        marker_b1c5f06c8441ee1cfa7b3835b71d253a.bindPopup(popup_32c29d8e180ab2af00a707611284be71)
+        ;
+
+        
+    
+    
+            marker_b1c5f06c8441ee1cfa7b3835b71d253a.bindTooltip(
+                `<div>
+                     利他食堂
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b1c5f06c8441ee1cfa7b3835b71d253a.setIcon(icon_e779a4b9013031e80b6710a278003094);
+            
+    
+            var marker_7ea21f6f6ea1d0e0753d308221c6cdc6 = L.marker(
+                [33.56122352124266, 133.5386680803662],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_0b5a892709bbefeccf0fd90f76d26157 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0e01aaf407464ceaaaeb17ae4b999e04 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b1452cd8e6c01c8c54005427efaac6a8 = $(`<div id="html_b1452cd8e6c01c8c54005427efaac6a8" style="width: 100.0%; height: 100.0%;">     <b>居酒屋 大吉</b><br>     高知県高知市帯屋町１丁目１５−１３<br>     シーン：カジュアル（海鮮強め）<br>     何でもおいしいですが海鮮が特においしいです。平日でも地元の会社員が仕事終わりに行って、すぐに満席になるので、予約必須です。大学時の先生が一番好きだった居酒屋です。<br>     <a href="https://maps.app.goo.gl/NrTuE7nGPnAdvDL8A" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_0e01aaf407464ceaaaeb17ae4b999e04.setContent(html_b1452cd8e6c01c8c54005427efaac6a8);
+            
+        
+
+        marker_7ea21f6f6ea1d0e0753d308221c6cdc6.bindPopup(popup_0e01aaf407464ceaaaeb17ae4b999e04)
+        ;
+
+        
+    
+    
+            marker_7ea21f6f6ea1d0e0753d308221c6cdc6.bindTooltip(
+                `<div>
+                     居酒屋 大吉
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7ea21f6f6ea1d0e0753d308221c6cdc6.setIcon(icon_0b5a892709bbefeccf0fd90f76d26157);
+            
+    
+            var marker_fe9ef52e15169b8866f7b1f406613e0f = L.marker(
+                [33.5615858799899, 133.54074003803743],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_48923fa9fed9dcbd7ccdc9eb597faa1b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d5f1b6c9f3d26e9ff102a6b7b00c1925 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2f68390926bccdcf8297d812777d802e = $(`<div id="html_2f68390926bccdcf8297d812777d802e" style="width: 100.0%; height: 100.0%;">     <b>小西湖</b><br>     高知県高知市帯屋町１丁目８−１４ ニュープリンスミタニビル １階<br>     シーン：カジュアル（中華含む）<br>     ここも何でもおいしいです。意外と中華がおいしいです。友人のバイト先だったので時々行ってました。<br>     <a href="https://maps.app.goo.gl/MVtXmz7rYXSjXebz7" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_d5f1b6c9f3d26e9ff102a6b7b00c1925.setContent(html_2f68390926bccdcf8297d812777d802e);
+            
+        
+
+        marker_fe9ef52e15169b8866f7b1f406613e0f.bindPopup(popup_d5f1b6c9f3d26e9ff102a6b7b00c1925)
+        ;
+
+        
+    
+    
+            marker_fe9ef52e15169b8866f7b1f406613e0f.bindTooltip(
+                `<div>
+                     小西湖
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fe9ef52e15169b8866f7b1f406613e0f.setIcon(icon_48923fa9fed9dcbd7ccdc9eb597faa1b);
+            
+    
+            var marker_6cf72e3c6bca19c33dbe159ff29c5526 = L.marker(
+                [33.56116308838356, 133.53967034042697],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_f11228340f8342a35512ba2871b27af5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_04ce95eb221bd54b1abad390a7109505 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6133afa8873ca5316f2b86bde63abf38 = $(`<div id="html_6133afa8873ca5316f2b86bde63abf38" style="width: 100.0%; height: 100.0%;">     <b>遊角（営業確認必要）</b><br>     高知県高知市帯屋町1-9-18<br>     シーン：二件目以降／軽め<br>     ここも酒も肴もおいしいですが、２件目以降って感じの店です。もしかすると閉店しているかもしれません。<br>     <a href="https://tabelog.com/kochi/A3901/A390101/39003145/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_04ce95eb221bd54b1abad390a7109505.setContent(html_6133afa8873ca5316f2b86bde63abf38);
+            
+        
+
+        marker_6cf72e3c6bca19c33dbe159ff29c5526.bindPopup(popup_04ce95eb221bd54b1abad390a7109505)
+        ;
+
+        
+    
+    
+            marker_6cf72e3c6bca19c33dbe159ff29c5526.bindTooltip(
+                `<div>
+                     遊角（営業確認必要）
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6cf72e3c6bca19c33dbe159ff29c5526.setIcon(icon_f11228340f8342a35512ba2871b27af5);
+            
+    
+            var marker_6bc5a1077449bf5684c8eae5121a0ae5 = L.marker(
+                [34.34555835595261, 134.04915060867884],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_0ee3e1ff5ee5f5c623dc72dc40e56926 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_beccf4ddfc626a81ba529428d78d3cb5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_df8b00ee0089c07385bd510d23edefd0 = $(`<div id="html_df8b00ee0089c07385bd510d23edefd0" style="width: 100.0%; height: 100.0%;">     <b>人情味酒場 えんぎ屋</b><br>     古新町10-6 荒木ビル 1F<br>     シーン：居酒屋<br>     焼鳥等の鶏メニューが中心 飲み物のメニューも豊富<br>     <a href="https://tabelog.com/kagawa/A3701/A370101/37006272/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_beccf4ddfc626a81ba529428d78d3cb5.setContent(html_df8b00ee0089c07385bd510d23edefd0);
+            
+        
+
+        marker_6bc5a1077449bf5684c8eae5121a0ae5.bindPopup(popup_beccf4ddfc626a81ba529428d78d3cb5)
+        ;
+
+        
+    
+    
+            marker_6bc5a1077449bf5684c8eae5121a0ae5.bindTooltip(
+                `<div>
+                     人情味酒場 えんぎ屋
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6bc5a1077449bf5684c8eae5121a0ae5.setIcon(icon_0ee3e1ff5ee5f5c623dc72dc40e56926);
+            
+    
+            var marker_4a4f1b81fa001efb76299143e98b82e8 = L.marker(
+                [34.343296056275136, 134.05177477895637],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_95dc4d24d0db21a9b2d315a31d9cca85 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3e94301e632b3cfbc05aeba1c3b26022 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8c38533e6e868acb10a7be373f8090b0 = $(`<div id="html_8c38533e6e868acb10a7be373f8090b0" style="width: 100.0%; height: 100.0%;">     <b>ガブマル食堂</b><br>     御坊町9-5<br>     シーン：居酒屋、ワインバー、 スペイン料理<br>     リーズナブルにソムリエおすすめ自然派ワインと無農薬野菜が楽しめる店<br>     <a href="https://tabelog.com/kagawa/A3701/A370101/37009267/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_3e94301e632b3cfbc05aeba1c3b26022.setContent(html_8c38533e6e868acb10a7be373f8090b0);
+            
+        
+
+        marker_4a4f1b81fa001efb76299143e98b82e8.bindPopup(popup_3e94301e632b3cfbc05aeba1c3b26022)
+        ;
+
+        
+    
+    
+            marker_4a4f1b81fa001efb76299143e98b82e8.bindTooltip(
+                `<div>
+                     ガブマル食堂
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4a4f1b81fa001efb76299143e98b82e8.setIcon(icon_95dc4d24d0db21a9b2d315a31d9cca85);
+            
+    
+            var marker_07fe9beb5de080569b31b6fa023cf82b = L.marker(
+                [34.341073488597644, 134.0498564334837],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_37c760f012050ea03b671156b6fb338d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2a82762781e3a87c7ce694e4147eff16 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_61b0310aa3e9197cd5a43bee65fc73e0 = $(`<div id="html_61b0310aa3e9197cd5a43bee65fc73e0" style="width: 100.0%; height: 100.0%;">     <b>ミライザカ 高松南新町店</b><br>     南新町12-5 タカラヤビル1F・2F<br>     シーン：居酒屋、焼き鳥、もつ鍋<br>     旨唐揚げ×居酒メシを楽しむ大衆酒場 飲み放題付コース充実<br>     <a href="https://tabelog.com/kagawa/A3701/A370101/37012901/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_2a82762781e3a87c7ce694e4147eff16.setContent(html_61b0310aa3e9197cd5a43bee65fc73e0);
+            
+        
+
+        marker_07fe9beb5de080569b31b6fa023cf82b.bindPopup(popup_2a82762781e3a87c7ce694e4147eff16)
+        ;
+
+        
+    
+    
+            marker_07fe9beb5de080569b31b6fa023cf82b.bindTooltip(
+                `<div>
+                     ミライザカ 高松南新町店
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_07fe9beb5de080569b31b6fa023cf82b.setIcon(icon_37c760f012050ea03b671156b6fb338d);
+            
+    
+            var marker_41e5b1a5239689ad9c3ed5f4aab67408 = L.marker(
+                [34.343523322971784, 134.04938777747736],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_1202a26bfa028001f9a6f3651cf53310 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f06bf787e04f1e21ce6fa0b2646f1512 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_321a0a25ab1013f470e66148315142ec = $(`<div id="html_321a0a25ab1013f470e66148315142ec" style="width: 100.0%; height: 100.0%;">     <b>藁焼き鰹たたき　明神丸 高松店</b><br>     鍛冶屋町1-5 FKビル 2F<br>     シーン：海鮮、居酒屋<br>     店内で藁焼き鰹たたきの調理<br>     <a href="https://tabelog.com/kagawa/A3701/A370101/37010419" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_f06bf787e04f1e21ce6fa0b2646f1512.setContent(html_321a0a25ab1013f470e66148315142ec);
+            
+        
+
+        marker_41e5b1a5239689ad9c3ed5f4aab67408.bindPopup(popup_f06bf787e04f1e21ce6fa0b2646f1512)
+        ;
+
+        
+    
+    
+            marker_41e5b1a5239689ad9c3ed5f4aab67408.bindTooltip(
+                `<div>
+                     藁焼き鰹たたき　明神丸 高松店
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_41e5b1a5239689ad9c3ed5f4aab67408.setIcon(icon_1202a26bfa028001f9a6f3651cf53310);
+            
+    
+            var marker_4186f9892a9e09c76e7a4aa82a9bd1bf = L.marker(
+                [34.34306600329204, 134.0486217541805],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_29a23ff4f1b0e82d051b86184e3399f0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_028abb3bb7ebaf73da3a9b2d07e44519 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8dc4d12fe30cf69e12959e6d01092dbf = $(`<div id="html_8dc4d12fe30cf69e12959e6d01092dbf" style="width: 100.0%; height: 100.0%;">     <b>骨付鳥 一鶴 高松店</b><br>     鍛冶屋町4-11<br>     シーン：骨付鳥<br>     骨付鳥の専門店<br>     <a href="https://www.ikkaku.co.jp/takamatsu/menu.html" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_028abb3bb7ebaf73da3a9b2d07e44519.setContent(html_8dc4d12fe30cf69e12959e6d01092dbf);
+            
+        
+
+        marker_4186f9892a9e09c76e7a4aa82a9bd1bf.bindPopup(popup_028abb3bb7ebaf73da3a9b2d07e44519)
+        ;
+
+        
+    
+    
+            marker_4186f9892a9e09c76e7a4aa82a9bd1bf.bindTooltip(
+                `<div>
+                     骨付鳥 一鶴 高松店
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4186f9892a9e09c76e7a4aa82a9bd1bf.setIcon(icon_29a23ff4f1b0e82d051b86184e3399f0);
+            
+    
+            var marker_06f5dd75d39a92c593fcb060e421ccf0 = L.marker(
+                [34.34914558508594, 134.04670314751365],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_c80da4b1f0064a4f0876e9dad2085a60 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_143ff54acc98a27140604675c54da9ab = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1431d6df6b81e930c7eaaa44543695a3 = $(`<div id="html_1431d6df6b81e930c7eaaa44543695a3" style="width: 100.0%; height: 100.0%;">     <b>味工房 六車</b><br>     西の丸町12-3<br>     シーン：居酒屋<br>     餃子と枝豆が楽しい居酒屋<br>     <a href="https://tabelog.com/kagawa/A3701/A370101/37009437/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_143ff54acc98a27140604675c54da9ab.setContent(html_1431d6df6b81e930c7eaaa44543695a3);
+            
+        
+
+        marker_06f5dd75d39a92c593fcb060e421ccf0.bindPopup(popup_143ff54acc98a27140604675c54da9ab)
+        ;
+
+        
+    
+    
+            marker_06f5dd75d39a92c593fcb060e421ccf0.bindTooltip(
+                `<div>
+                     味工房 六車
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_06f5dd75d39a92c593fcb060e421ccf0.setIcon(icon_c80da4b1f0064a4f0876e9dad2085a60);
+            
+    
+            var marker_61b271fb8873b6db37fbafbd93fb2460 = L.marker(
+                [34.346343861188174, 134.04954731553306],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_acdd8e29487deeff1d7674a019b6b0b5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_226e0e7988c06f87f874392fb3a8b757 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4b3015762741c7d50471cab5fb597487 = $(`<div id="html_4b3015762741c7d50471cab5fb597487" style="width: 100.0%; height: 100.0%;">     <b>骨付鳥 寄鳥味鳥</b><br>     兵庫町1-24 2F<br>     シーン：骨付鳥<br>     レトロ雰囲気が心地よい骨付鳥店<br>     <a href="https://tabelog.com/kagawa/A3701/A370101/37000753/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_226e0e7988c06f87f874392fb3a8b757.setContent(html_4b3015762741c7d50471cab5fb597487);
+            
+        
+
+        marker_61b271fb8873b6db37fbafbd93fb2460.bindPopup(popup_226e0e7988c06f87f874392fb3a8b757)
+        ;
+
+        
+    
+    
+            marker_61b271fb8873b6db37fbafbd93fb2460.bindTooltip(
+                `<div>
+                     骨付鳥 寄鳥味鳥
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_61b271fb8873b6db37fbafbd93fb2460.setIcon(icon_acdd8e29487deeff1d7674a019b6b0b5);
+            
+    
+            var marker_e18012ba0eacb63f1ed95635d42991fe = L.marker(
+                [34.345486969515015, 134.0491660464022],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_741fd061737bd5a5a24996f3aae5e535 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4030112be4362387b96430a7e4620bf6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3c89c65b51a43aa82fbe60d5d6360126 = $(`<div id="html_3c89c65b51a43aa82fbe60d5d6360126" style="width: 100.0%; height: 100.0%;">     <b>旬彩真 和っか</b><br>     古新町10-9<br>     シーン：和食店<br>     食のレベルと日本酒の品揃えが秀逸<br>     <a href="https://shunsai-sin-wakka.gorp.jp/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_4030112be4362387b96430a7e4620bf6.setContent(html_3c89c65b51a43aa82fbe60d5d6360126);
+            
+        
+
+        marker_e18012ba0eacb63f1ed95635d42991fe.bindPopup(popup_4030112be4362387b96430a7e4620bf6)
+        ;
+
+        
+    
+    
+            marker_e18012ba0eacb63f1ed95635d42991fe.bindTooltip(
+                `<div>
+                     旬彩真 和っか
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e18012ba0eacb63f1ed95635d42991fe.setIcon(icon_741fd061737bd5a5a24996f3aae5e535);
+            
+    
+            var marker_a31f61342f3439c61b8be0ee18ca7ca4 = L.marker(
+                [34.34468763390209, 134.05193816911253],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_2a9adee5892e1752cb8ccee7ad3b9d30 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b209ee5f2940e3ccb63a59f7e7f04936 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_80ce50265822e009fb0e1fd7e6ad4ec2 = $(`<div id="html_80ce50265822e009fb0e1fd7e6ad4ec2" style="width: 100.0%; height: 100.0%;">     <b>とりいちず</b><br>     高松市大工町2-1<br>     シーン：居酒屋<br>     飲物の種類とボリューム豊富<br>     <a href="https://toriichizu.net/shoplist/kagawa/takamatsu/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_b209ee5f2940e3ccb63a59f7e7f04936.setContent(html_80ce50265822e009fb0e1fd7e6ad4ec2);
+            
+        
+
+        marker_a31f61342f3439c61b8be0ee18ca7ca4.bindPopup(popup_b209ee5f2940e3ccb63a59f7e7f04936)
+        ;
+
+        
+    
+    
+            marker_a31f61342f3439c61b8be0ee18ca7ca4.bindTooltip(
+                `<div>
+                     とりいちず
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a31f61342f3439c61b8be0ee18ca7ca4.setIcon(icon_2a9adee5892e1752cb8ccee7ad3b9d30);
+            
+    
+            var marker_e4947db2adfefaff78939bf6bc7add42 = L.marker(
+                [34.34607776231839, 134.05241286308143],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_4f7c138c8d62f18f166a226af6e2842f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c7f8aed6f5a53ae570c9a3bd0e9acfcb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f3add50291c307347910c22cd0699a2f = $(`<div id="html_f3add50291c307347910c22cd0699a2f" style="width: 100.0%; height: 100.0%;">     <b>サンダー酒場</b><br>     高松市内町6-18<br>     シーン：居酒屋<br>     価格は安価で活気がある酒場<br>     <a href="https://tabelog.com/kagawa/A3701/A370101/37008833/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_c7f8aed6f5a53ae570c9a3bd0e9acfcb.setContent(html_f3add50291c307347910c22cd0699a2f);
+            
+        
+
+        marker_e4947db2adfefaff78939bf6bc7add42.bindPopup(popup_c7f8aed6f5a53ae570c9a3bd0e9acfcb)
+        ;
+
+        
+    
+    
+            marker_e4947db2adfefaff78939bf6bc7add42.bindTooltip(
+                `<div>
+                     サンダー酒場
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e4947db2adfefaff78939bf6bc7add42.setIcon(icon_4f7c138c8d62f18f166a226af6e2842f);
+            
+    
+            var marker_535626190ac61038f7f74ab3b76413bc = L.marker(
+                [34.345899323259175, 134.05242439350195],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_39f018bf8991f5c4129995ff6a6b547e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_390e513d35816cf5f8e54fa3aa615bd4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ab143b79b7beeb7e75a7a99c20bfa275 = $(`<div id="html_ab143b79b7beeb7e75a7a99c20bfa275" style="width: 100.0%; height: 100.0%;">     <b>韋駄天</b><br>     高松市片原町2-1<br>     シーン：居酒屋<br>     価格は安価で活気がある酒場<br>     <a href="https://tabelog.com/kagawa/A3701/A370101/37005300/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_390e513d35816cf5f8e54fa3aa615bd4.setContent(html_ab143b79b7beeb7e75a7a99c20bfa275);
+            
+        
+
+        marker_535626190ac61038f7f74ab3b76413bc.bindPopup(popup_390e513d35816cf5f8e54fa3aa615bd4)
+        ;
+
+        
+    
+    
+            marker_535626190ac61038f7f74ab3b76413bc.bindTooltip(
+                `<div>
+                     韋駄天
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_535626190ac61038f7f74ab3b76413bc.setIcon(icon_39f018bf8991f5c4129995ff6a6b547e);
+            
+    
+            var marker_565293ddfdb2591c4497c330fbed8b2c = L.marker(
+                [34.345665347842875, 134.05271128729714],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_54d0ec67f19ea09829b203482baa2d1b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bd936168c25a9ec8491b4223513d1915 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6a36c9f58d5c335964406a0c553f86ca = $(`<div id="html_6a36c9f58d5c335964406a0c553f86ca" style="width: 100.0%; height: 100.0%;">     <b>炭火串焼 とり隆</b><br>     高松市片原町9丁目8<br>     シーン：炭火串焼<br>     串一品メニューが美味<br>     <a href="https://tabelog.com/kagawa/A3701/A370101/37014341/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_bd936168c25a9ec8491b4223513d1915.setContent(html_6a36c9f58d5c335964406a0c553f86ca);
+            
+        
+
+        marker_565293ddfdb2591c4497c330fbed8b2c.bindPopup(popup_bd936168c25a9ec8491b4223513d1915)
+        ;
+
+        
+    
+    
+            marker_565293ddfdb2591c4497c330fbed8b2c.bindTooltip(
+                `<div>
+                     炭火串焼 とり隆
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_565293ddfdb2591c4497c330fbed8b2c.setIcon(icon_54d0ec67f19ea09829b203482baa2d1b);
+            
+    
+            var marker_ddecac8895921c62e5b1c0ff9f43f1df = L.marker(
+                [34.343257492282135, 134.04880899339514],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_c28e6fc5e5dc614ba70e46925d37216a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2ec5f0246b656ae276a5c93c63310c8f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5b386f48022263f2c942c670acad0818 = $(`<div id="html_5b386f48022263f2c942c670acad0818" style="width: 100.0%; height: 100.0%;">     <b>海鮮うまいもんや　浜街道 鍛冶屋町店</b><br>     高松市鍛冶屋町1-15 工藤ビル 1F<br>     シーン：シーフード、海鮮料理<br>     海鮮計メニューが豊富<br>     <a href="https://hamakaidou-kajiyamachi.com/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_2ec5f0246b656ae276a5c93c63310c8f.setContent(html_5b386f48022263f2c942c670acad0818);
+            
+        
+
+        marker_ddecac8895921c62e5b1c0ff9f43f1df.bindPopup(popup_2ec5f0246b656ae276a5c93c63310c8f)
+        ;
+
+        
+    
+    
+            marker_ddecac8895921c62e5b1c0ff9f43f1df.bindTooltip(
+                `<div>
+                     海鮮うまいもんや　浜街道 鍛冶屋町店
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ddecac8895921c62e5b1c0ff9f43f1df.setIcon(icon_c28e6fc5e5dc614ba70e46925d37216a);
+            
+    
+            var marker_a74e0bc825bb5d885d32589ff4cf752b = L.marker(
+                [34.34552873163058, 134.05470559274934],
+                {
+}
+            ).addTo(map_74574e3c0ecc8519c7203498ad0d588e);
+        
+    
+            var icon_fe66fae228e90280dd7160655f790437 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9f5ee920825944467fa1050cf765e82f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ff81edd312e7c7cb56e4510d7492b0e9 = $(`<div id="html_ff81edd312e7c7cb56e4510d7492b0e9" style="width: 100.0%; height: 100.0%;">     <b>餃子 寺岡 高松片原町店</b><br>     高松市片原町4-11<br>     シーン：餃子<br>     餃子は小さめのバリバリ食感<br>     <a href="https://tabelog.com/kagawa/A3701/A370101/37003583/" target="_blank">お店のサイト</a>     </div>`)[0];
+                popup_9f5ee920825944467fa1050cf765e82f.setContent(html_ff81edd312e7c7cb56e4510d7492b0e9);
+            
+        
+
+        marker_a74e0bc825bb5d885d32589ff4cf752b.bindPopup(popup_9f5ee920825944467fa1050cf765e82f)
+        ;
+
+        
+    
+    
+            marker_a74e0bc825bb5d885d32589ff4cf752b.bindTooltip(
+                `<div>
+                     餃子 寺岡 高松片原町店
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a74e0bc825bb5d885d32589ff4cf752b.setIcon(icon_fe66fae228e90280dd7160655f790437);
+            
+</script>
+</html>
