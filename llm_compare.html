@@ -3,117 +3,131 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>LLM比較ビュー</title>
+<title>LLM比較</title>
+
 <style>
-body {
-    margin: 0;
-    font-family: Arial;
-}
-.container {
-    display: flex;
-    height: 100vh;
-}
-.sidebar {
-    width: 20%;
-    padding: 15px;
-    overflow-y: auto;
-    border-right: 2px solid #ccc;
-}
-.main {
-    width: 80%;
-    padding: 15px;
-    overflow: auto;
-}
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-th, td {
-    border: 1px solid #ccc;
-    padding: 4px;
-    text-align: center;
-}
+body { margin:0; font-family:Arial; }
+.container { display:flex; height:100vh; }
+.sidebar { width:20%; padding:10px; border-right:1px solid #ccc; overflow:auto; }
+.main { width:80%; padding:10px; }
+
+table { border-collapse:collapse; width:100%; }
+th,td { border:1px solid #ccc; padding:4px; text-align:center; }
+
 th {
-    background: #eee;
     position: sticky;
     top: 0;
-    z-index: 2;
+    background: #eee;
 }
-button {
-    margin: 3px;
-}
+
 .hidden { display:none; }
+button { margin:2px; }
 </style>
 </head>
+
 <body>
 
 <div class="container">
+
 <div class="sidebar">
 
-<h3>観点選択</h3>
-<button onclick="setMode('model')">モデル</button>
-<button onclick="setMode('gpu')">GPU</button>
-<button onclick="setMode('size')">パラメータサイズ</button>
-<br>
-<button onclick="selectAll()">全選択</button>
-<button onclick="clearAll()">全解除</button>
-<br>
-<button onclick="downloadCSV()">CSVダウンロード</button>
-<br>
-<a href="https://github.com/iwa103/LLM/blob/main/Q10/10question.json" target="_blank">
-問題リンク（10question.json）
-</a>
+<h3>モード</h3>
+<button onclick="setMode('model')">モデル比較</button>
+<button onclick="setMode('company')">会社比較</button>
+<button onclick="setMode('size')">サイズ比較</button>
+
 <hr>
 
-<div id="modelFilters">
+<!-- モデル -->
+<div id="modelUI">
+<h4>モデル</h4>
+<button onclick="selectAllModel()">全選択</button>
+<button onclick="clearAllModel()">全解除</button>
+<br>
+<label><input type="checkbox" class="modelFilter" value="ChatGPT" checked> ChatGPT</label><br>
+<label><input type="checkbox" class="modelFilter" value="Claud opus 4.6" checked> Claud opus 4.6</label><br>
+<label><input type="checkbox" class="modelFilter" value="Claud sonet 4.6" checked> Claud sonet 4.6</label><br>
+<label><input type="checkbox" class="modelFilter" value="GLM-5" checked> GLM-5</label><br>
+<label><input type="checkbox" class="modelFilter" value="GPT-OSS" checked> GPT-OSS</label><br>
+<label><input type="checkbox" class="modelFilter" value="Gemini 3" checked> Gemini 3</label><br>
+<label><input type="checkbox" class="modelFilter" value="Gemini 3.1" checked> Gemini 3.1</label><br>
+<label><input type="checkbox" class="modelFilter" value="MiniMax M2.5" checked> MiniMax M2.5</label><br>
+<label><input type="checkbox" class="modelFilter" value="Qwen3" checked> Qwen3</label><br>
+<label><input type="checkbox" class="modelFilter" value="Qwen3 Next" checked> Qwen3 Next</label><br>
+<label><input type="checkbox" class="modelFilter" value="Qwen3 VL" checked> Qwen3 VL</label><br>
+<label><input type="checkbox" class="modelFilter" value="Qwen3.5" checked> Qwen3.5</label><br>
+<label><input type="checkbox" class="modelFilter" value="kimi2.5" checked> kimi2.5</label><br>
+<label><input type="checkbox" class="modelFilter" value="mimo v2 pro" checked> mimo v2 pro</label><br>
+<label><input type="checkbox" class="modelFilter" value="nemotron 3" checked> nemotron 3</label><br>
+</div>
+
+<!-- 会社 -->
+<div id="companyUI" class="hidden">
 <h4>会社</h4>
-<label><input type="checkbox" class="compFilter" value="Anthropic" checked> Anthropic</label><br><label><input type="checkbox" class="compFilter" value="Google" checked> Google</label><br><label><input type="checkbox" class="compFilter" value="MiniMax" checked> MiniMax</label><br><label><input type="checkbox" class="compFilter" value="MoonshotAI" checked> MoonshotAI</label><br><label><input type="checkbox" class="compFilter" value="NVIDIA" checked> NVIDIA</label><br><label><input type="checkbox" class="compFilter" value="OpenAI" checked> OpenAI</label><br><label><input type="checkbox" class="compFilter" value="Qwen" checked> Qwen</label><br><label><input type="checkbox" class="compFilter" value="Xiaomi" checked> Xiaomi</label><br><label><input type="checkbox" class="compFilter" value="Z.AI" checked> Z.AI</label><br>
-<hr>
-<h4>モデル系列</h4>
-<label><input type="checkbox" class="familyFilter" value="ChatGPT" checked> ChatGPT</label><br><label><input type="checkbox" class="familyFilter" value="Claud opus 4.6" checked> Claud opus 4.6</label><br><label><input type="checkbox" class="familyFilter" value="Claud sonet 4.6" checked> Claud sonet 4.6</label><br><label><input type="checkbox" class="familyFilter" value="GLM-5" checked> GLM-5</label><br><label><input type="checkbox" class="familyFilter" value="GPT-OSS" checked> GPT-OSS</label><br><label><input type="checkbox" class="familyFilter" value="Gemini 3" checked> Gemini 3</label><br><label><input type="checkbox" class="familyFilter" value="Gemini 3.1" checked> Gemini 3.1</label><br><label><input type="checkbox" class="familyFilter" value="MiniMax M2.5" checked> MiniMax M2.5</label><br><label><input type="checkbox" class="familyFilter" value="Qwen3" checked> Qwen3</label><br><label><input type="checkbox" class="familyFilter" value="Qwen3 Next" checked> Qwen3 Next</label><br><label><input type="checkbox" class="familyFilter" value="Qwen3 VL" checked> Qwen3 VL</label><br><label><input type="checkbox" class="familyFilter" value="Qwen3.5" checked> Qwen3.5</label><br><label><input type="checkbox" class="familyFilter" value="kimi2.5" checked> kimi2.5</label><br><label><input type="checkbox" class="familyFilter" value="mimo v2 pro" checked> mimo v2 pro</label><br><label><input type="checkbox" class="familyFilter" value="nemotron 3" checked> nemotron 3</label><br>
-<hr>
-<h4>個別モデル</h4>
-<label><input type="checkbox" class="modelFilter" value="qwen3-1.7B" checked> qwen3-1.7B</label><br><label><input type="checkbox" class="modelFilter" value="qwen3-4B" checked> qwen3-4B</label><br><label><input type="checkbox" class="modelFilter" value="qwen3-8B" checked> qwen3-8B</label><br><label><input type="checkbox" class="modelFilter" value="qwen3-14B" checked> qwen3-14B</label><br><label><input type="checkbox" class="modelFilter" value="qwen3-30B-A3B" checked> qwen3-30B-A3B</label><br><label><input type="checkbox" class="modelFilter" value="qwen3-32B" checked> qwen3-32B</label><br><label><input type="checkbox" class="modelFilter" value="GPT-OSS-20B L" checked> GPT-OSS-20B L</label><br><label><input type="checkbox" class="modelFilter" value="GPT-OSS-20B  M" checked> GPT-OSS-20B  M</label><br><label><input type="checkbox" class="modelFilter" value="GPT-OSS-20B  H" checked> GPT-OSS-20B  H</label><br><label><input type="checkbox" class="modelFilter" value="qwen3-4B-inst-2507" checked> qwen3-4B-inst-2507</label><br><label><input type="checkbox" class="modelFilter" value="qwen3-4B-think-2507" checked> qwen3-4B-think-2507</label><br><label><input type="checkbox" class="modelFilter" value="qwen3-30B-A3B-inst-2507" checked> qwen3-30B-A3B-inst-2507</label><br><label><input type="checkbox" class="modelFilter" value="qwen3-30B-A3B-think-2507" checked> qwen3-30B-A3B-think-2507</label><br><label><input type="checkbox" class="modelFilter" value="qwen3-vl-2b-instruct" checked> qwen3-vl-2b-instruct</label><br><label><input type="checkbox" class="modelFilter" value="qwen3-vl-4b-instruct" checked> qwen3-vl-4b-instruct</label><br><label><input type="checkbox" class="modelFilter" value="qwen3-vl-8b-instruct" checked> qwen3-vl-8b-instruct</label><br><label><input type="checkbox" class="modelFilter" value="GPT5.2(20260103)" checked> GPT5.2(20260103)</label><br><label><input type="checkbox" class="modelFilter" value="Qwen3 MAX(20260103)" checked> Qwen3 MAX(20260103)</label><br><label><input type="checkbox" class="modelFilter" value="Qwen3 next 80B-A3B(20260103)" checked> Qwen3 next 80B-A3B(20260103)</label><br><label><input type="checkbox" class="modelFilter" value="Qwen3 235B-A22B 2507(20260103)" checked> Qwen3 235B-A22B 2507(20260103)</label><br><label><input type="checkbox" class="modelFilter" value="Qwen3 VL 235B-A22B(20260103)" checked> Qwen3 VL 235B-A22B(20260103)</label><br><label><input type="checkbox" class="modelFilter" value="Claud opus 4.6 think" checked> Claud opus 4.6 think</label><br><label><input type="checkbox" class="modelFilter" value="Qwen3.5 397B-A17B" checked> Qwen3.5 397B-A17B</label><br><label><input type="checkbox" class="modelFilter" value="GPT-OSS-120B" checked> GPT-OSS-120B</label><br><label><input type="checkbox" class="modelFilter" value="Claude sonet 4.6" checked> Claude sonet 4.6</label><br><label><input type="checkbox" class="modelFilter" value="Gemini 3 pro" checked> Gemini 3 pro</label><br><label><input type="checkbox" class="modelFilter" value="Gemini 3.1 pro previw" checked> Gemini 3.1 pro previw</label><br><label><input type="checkbox" class="modelFilter" value="Qwen3.5 27B" checked> Qwen3.5 27B</label><br><label><input type="checkbox" class="modelFilter" value="Qwen3.5 30B-A3B" checked> Qwen3.5 30B-A3B</label><br><label><input type="checkbox" class="modelFilter" value="Qwen3.5 122B-A10B" checked> Qwen3.5 122B-A10B</label><br><label><input type="checkbox" class="modelFilter" value="MiniMax M2.5" checked> MiniMax M2.5</label><br><label><input type="checkbox" class="modelFilter" value="GLM-5(754B-A40B)" checked> GLM-5(754B-A40B)</label><br><label><input type="checkbox" class="modelFilter" value="Kimi2.5-instant(1100B-A32B)" checked> Kimi2.5-instant(1100B-A32B)</label><br><label><input type="checkbox" class="modelFilter" value="nano 4B" checked> nano 4B</label><br><label><input type="checkbox" class="modelFilter" value="super" checked> super</label><br><label><input type="checkbox" class="modelFilter" value="super low" checked> super low</label><br><label><input type="checkbox" class="modelFilter" value="super high" checked> super high</label><br><label><input type="checkbox" class="modelFilter" value="nano 30B" checked> nano 30B</label><br><label><input type="checkbox" class="modelFilter" value="MiniMax M2.7" checked> MiniMax M2.7</label><br><label><input type="checkbox" class="modelFilter" value="mimo v2 pro(1000B-A42B)" checked> mimo v2 pro(1000B-A42B)</label><br><label><input type="checkbox" class="modelFilter" value="Qwen3.5 9B Q4" checked> Qwen3.5 9B Q4</label><br><label><input type="checkbox" class="modelFilter" value="Qwen3.5 9B Q6" checked> Qwen3.5 9B Q6</label><br><label><input type="checkbox" class="modelFilter" value="Qwen3.5 27B Q4" checked> Qwen3.5 27B Q4</label><br><label><input type="checkbox" class="modelFilter" value="Qwen3.5 35B-A3B Q4" checked> Qwen3.5 35B-A3B Q4</label><br>
+<button onclick="selectAllCompany()">全選択</button>
+<button onclick="clearAllCompany()">全解除</button>
+<br>
+<label><input type="checkbox" class="compFilter" value="Anthropic" checked> Anthropic</label><br>
+<label><input type="checkbox" class="compFilter" value="Google" checked> Google</label><br>
+<label><input type="checkbox" class="compFilter" value="MiniMax" checked> MiniMax</label><br>
+<label><input type="checkbox" class="compFilter" value="MoonshotAI" checked> MoonshotAI</label><br>
+<label><input type="checkbox" class="compFilter" value="NVIDIA" checked> NVIDIA</label><br>
+<label><input type="checkbox" class="compFilter" value="OpenAI" checked> OpenAI</label><br>
+<label><input type="checkbox" class="compFilter" value="Qwen" checked> Qwen</label><br>
+<label><input type="checkbox" class="compFilter" value="Xiaomi" checked> Xiaomi</label><br>
+<label><input type="checkbox" class="compFilter" value="Z.AI" checked> Z.AI</label><br>
 </div>
 
-<div id="gpuFilters" class="hidden">
-<h4>GPU選択</h4>
-<label><input type="checkbox" class="gpuFilter" value="ChatGPT" checked> ChatGPT</label><br><label><input type="checkbox" class="gpuFilter" value="Googleコラボ" checked> Googleコラボ</label><br><label><input type="checkbox" class="gpuFilter" value="LLM Arena" checked> LLM Arena</label><br><label><input type="checkbox" class="gpuFilter" value="Qwen Chat" checked> Qwen Chat</label><br><label><input type="checkbox" class="gpuFilter" value="nvidia" checked> nvidia</label><br><label><input type="checkbox" class="gpuFilter" value="run local" checked> run local</label><br>
-</div>
-
-<div id="sizeFilters" class="hidden">
-<h4>サイズ区分</h4>
-<label><input type="checkbox" class="sizeFilter" value="≤5B" checked> ≤5B</label><br><label><input type="checkbox" class="sizeFilter" value="5-10B" checked> 5-10B</label><br><label><input type="checkbox" class="sizeFilter" value="10-32B" checked> 10-32B</label><br><label><input type="checkbox" class="sizeFilter" value=">32B" checked> >32B</label><br>
+<!-- サイズ -->
+<div id="sizeUI" class="hidden">
+<h4>サイズ</h4>
+<label><input type="checkbox" class="sizeFilter" value="軽量" checked> 軽量</label><br>
+<label><input type="checkbox" class="sizeFilter" value="フル" checked> フル</label><br>
 </div>
 
 <hr>
-<button onclick="sortByTotal()">Total降順ソート</button>
+
+<h4>ソート</h4>
+<button onclick="sortByTotalDesc()">Total↓</button>
+<button onclick="sortByTotalAsc()">Total↑</button>
+<br>
+<button onclick="sortBySizeDesc()">Size↓</button>
+<button onclick="sortBySizeAsc()">Size↑</button>
+
+<hr>
+<button onclick="downloadCSV()">CSV</button>
 
 </div>
 
 <div class="main">
-<h2>結果表示</h2>
 
 <table id="dataTable">
 <thead><tr>
-<th>#ID</th><th>comp</th><th>model name</th><th>model</th><th>p size</th><th>mode</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>Q7</th><th>Q8</th><th>Q9</th><th>Q10</th><th>total</th><th>GPU</th><th>Unnamed: 18</th><th>size_class</th></tr></thead><tbody><tr><td>1</td><td>Qwen</td><td>Qwen3</td><td>qwen3-1.7B</td><td>1.7</td><td>no_think</td><td>0.0</td><td>1</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1</td><td>1</td><td>4.00</td><td>Googleコラボ</td><td>GPU A100</td><td>≤5B</td></tr><tr><td>2</td><td>Qwen</td><td>Qwen3</td><td>qwen3-1.7B</td><td>1.7</td><td>think</td><td>0.0</td><td>1</td><td>0.9</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>0.0</td><td>1</td><td>1</td><td>7.80</td><td>Googleコラボ</td><td>GPU A100</td><td>≤5B</td></tr><tr><td>3</td><td>Qwen</td><td>Qwen3</td><td>qwen3-4B</td><td>4.0</td><td>no_think</td><td>1.0</td><td>1</td><td>0.9</td><td>0.75</td><td>1.0</td><td>1.0</td><td>0.9</td><td>0.9</td><td>1</td><td>1</td><td>9.45</td><td>Googleコラボ</td><td>GPU A100</td><td>≤5B</td></tr><tr><td>4</td><td>Qwen</td><td>Qwen3</td><td>qwen3-4B</td><td>4.0</td><td>think</td><td>1.0</td><td>1</td><td>0.9</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>1</td><td>1</td><td>8.90</td><td>Googleコラボ</td><td>GPU A100</td><td>≤5B</td></tr><tr><td>5</td><td>Qwen</td><td>Qwen3</td><td>qwen3-8B</td><td>8.0</td><td>no_think</td><td>0.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>0.0</td><td>1</td><td>1</td><td>7.90</td><td>Googleコラボ</td><td>GPU A100</td><td>5-10B</td></tr><tr><td>6</td><td>Qwen</td><td>Qwen3</td><td>qwen3-8B</td><td>8.0</td><td>think</td><td>0.9</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>0.0</td><td>1</td><td>1</td><td>8.80</td><td>Googleコラボ</td><td>GPU A100</td><td>5-10B</td></tr><tr><td>7</td><td>Qwen</td><td>Qwen3</td><td>qwen3-14B</td><td>14.0</td><td>no_think</td><td>0.0</td><td>1</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.9</td><td>1.0</td><td>1</td><td>1</td><td>6.90</td><td>Googleコラボ</td><td>GPU A100</td><td>10-32B</td></tr><tr><td>8</td><td>Qwen</td><td>Qwen3</td><td>qwen3-14B</td><td>14.0</td><td>think</td><td>1.0</td><td>1</td><td>0.9</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>0.9</td><td>1</td><td>1</td><td>9.70</td><td>Googleコラボ</td><td>GPU A100</td><td>10-32B</td></tr><tr><td>9</td><td>Qwen</td><td>Qwen3</td><td>qwen3-30B-A3B</td><td>30.0</td><td>no_think</td><td>1.0</td><td>1</td><td>0.75</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1</td><td>1</td><td>7.75</td><td>Googleコラボ</td><td>GPU A100</td><td>10-32B</td></tr><tr><td>10</td><td>Qwen</td><td>Qwen3</td><td>qwen3-30B-A3B</td><td>30.0</td><td>think</td><td>0.0</td><td>1</td><td>0.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>0.0</td><td>1</td><td>1</td><td>6.90</td><td>Googleコラボ</td><td>GPU A100</td><td>10-32B</td></tr><tr><td>11</td><td>Qwen</td><td>Qwen3</td><td>qwen3-32B</td><td>32.0</td><td>no_think</td><td>0.0</td><td>1</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1</td><td>1</td><td>7.90</td><td>Googleコラボ</td><td>GPU A100</td><td>10-32B</td></tr><tr><td>12</td><td>Qwen</td><td>Qwen3</td><td>qwen3-32B</td><td>32.0</td><td>think</td><td>1.0</td><td>1</td><td>0.5</td><td>0.9</td><td>1.0</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1</td><td>1</td><td>8.40</td><td>Googleコラボ</td><td>GPU A100</td><td>10-32B</td></tr><tr><td>13</td><td>OpenAI</td><td>GPT-OSS</td><td>GPT-OSS-20B L</td><td>20.0</td><td>low</td><td>1.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.00</td><td>Googleコラボ</td><td>GPU A100</td><td>10-32B</td></tr><tr><td>14</td><td>OpenAI</td><td>GPT-OSS</td><td>GPT-OSS-20B  M</td><td>20.0</td><td>medium</td><td>0.9</td><td>1</td><td>0.25</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.15</td><td>Googleコラボ</td><td>GPU A100</td><td>10-32B</td></tr><tr><td>15</td><td>OpenAI</td><td>GPT-OSS</td><td>GPT-OSS-20B  H</td><td>20.0</td><td>high</td><td>0.0</td><td>1</td><td>0.0</td><td>1.0</td><td>0.9</td><td>0.0</td><td>0.9</td><td>0.0</td><td>1</td><td>1</td><td>5.80</td><td>Googleコラボ</td><td>GPU A100</td><td>10-32B</td></tr><tr><td>16</td><td>Qwen</td><td>Qwen3</td><td>qwen3-4B-inst-2507</td><td>4.0</td><td>no_think</td><td>0.0</td><td>1</td><td>0.9</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1</td><td>1</td><td>8.80</td><td>Googleコラボ</td><td>GPU A100</td><td>≤5B</td></tr><tr><td>17</td><td>Qwen</td><td>Qwen3</td><td>qwen3-4B-think-2507</td><td>4.0</td><td>think</td><td>1.0</td><td>1</td><td>0.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>0.0</td><td>1</td><td>1</td><td>7.90</td><td>Googleコラボ</td><td>GPU A100</td><td>≤5B</td></tr><tr><td>18</td><td>Qwen</td><td>Qwen3</td><td>qwen3-30B-A3B-inst-2507</td><td>30.0</td><td>no_think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1</td><td>1</td><td>8.90</td><td>Googleコラボ</td><td>GPU A100</td><td>10-32B</td></tr><tr><td>19</td><td>Qwen</td><td>Qwen3</td><td>qwen3-30B-A3B-think-2507</td><td>30.0</td><td>think</td><td>1.0</td><td>1</td><td>0.0</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.75</td><td>Googleコラボ</td><td>GPU A100</td><td>10-32B</td></tr><tr><td>20</td><td>Qwen</td><td>Qwen3 VL</td><td>qwen3-vl-2b-instruct</td><td>2.0</td><td>no_think</td><td>0.0</td><td>0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>1</td><td>0</td><td>2.00</td><td>run local</td><td>nan</td><td>≤5B</td></tr><tr><td>21</td><td>Qwen</td><td>Qwen3 VL</td><td>qwen3-vl-4b-instruct</td><td>4.0</td><td>no_think</td><td>1.0</td><td>1</td><td>0.5</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.9</td><td>0.0</td><td>1</td><td>1</td><td>6.40</td><td>run local</td><td>nan</td><td>≤5B</td></tr><tr><td>22</td><td>Qwen</td><td>Qwen3 VL</td><td>qwen3-vl-8b-instruct</td><td>8.0</td><td>no_think</td><td>0.0</td><td>1</td><td>0.9</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>1</td><td>1</td><td>7.65</td><td>run local</td><td>nan</td><td>5-10B</td></tr><tr><td>23</td><td>OpenAI</td><td>ChatGPT</td><td>GPT5.2(20260103)</td><td>nan</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>0.5</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.50</td><td>ChatGPT</td><td>nan</td><td>>32B</td></tr><tr><td>24</td><td>Qwen</td><td>Qwen3</td><td>Qwen3 MAX(20260103)</td><td>nan</td><td>none</td><td>0.0</td><td>1</td><td>0.9</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.90</td><td>Qwen Chat</td><td>nan</td><td>>32B</td></tr><tr><td>25</td><td>Qwen</td><td>Qwen3 Next</td><td>Qwen3 next 80B-A3B(20260103)</td><td>80.0</td><td>no_think</td><td>0.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.00</td><td>Qwen Chat</td><td>nan</td><td>>32B</td></tr><tr><td>26</td><td>Qwen</td><td>Qwen3 Next</td><td>Qwen3 next 80B-A3B(20260103)</td><td>80.0</td><td>think</td><td>1.0</td><td>1</td><td>0.0</td><td>0.25</td><td>1.0</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1</td><td>1</td><td>8.15</td><td>Qwen Chat</td><td>nan</td><td>>32B</td></tr><tr><td>27</td><td>Qwen</td><td>Qwen3</td><td>Qwen3 235B-A22B 2507(20260103)</td><td>235.0</td><td>no_think</td><td>0.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1</td><td>1</td><td>8.90</td><td>Qwen Chat</td><td>nan</td><td>>32B</td></tr><tr><td>28</td><td>Qwen</td><td>Qwen3 VL</td><td>Qwen3 VL 235B-A22B(20260103)</td><td>235.0</td><td>no_think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.90</td><td>Qwen Chat</td><td>nan</td><td>>32B</td></tr><tr><td>29</td><td>Qwen</td><td>Qwen3</td><td>Qwen3 235B-A22B 2507(20260103)</td><td>235.0</td><td>think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1</td><td>1</td><td>9.80</td><td>Qwen Chat</td><td>nan</td><td>>32B</td></tr><tr><td>30</td><td>Qwen</td><td>Qwen3 VL</td><td>Qwen3 VL 235B-A22B(20260103)</td><td>235.0</td><td>think</td><td>1.0</td><td>1</td><td>0.9</td><td>0.9</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.80</td><td>Qwen Chat</td><td>nan</td><td>>32B</td></tr><tr><td>31</td><td>Anthropic</td><td>Claud opus 4.6</td><td>Claud opus 4.6 think</td><td>nan</td><td>think</td><td>1.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>10.00</td><td>LLM Arena</td><td>nan</td><td>>32B</td></tr><tr><td>32</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 397B-A17B</td><td>397.0</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>10.00</td><td>LLM Arena</td><td>nan</td><td>>32B</td></tr><tr><td>33</td><td>OpenAI</td><td>GPT-OSS</td><td>GPT-OSS-120B</td><td>120.0</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>0.0</td><td>0.5</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.50</td><td>LLM Arena</td><td>nan</td><td>>32B</td></tr><tr><td>34</td><td>Anthropic</td><td>Claud sonet 4.6</td><td>Claude sonet 4.6</td><td>nan</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>10.00</td><td>LLM Arena</td><td>nan</td><td>>32B</td></tr><tr><td>35</td><td>Google</td><td>Gemini 3</td><td>Gemini 3 pro</td><td>nan</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>10.00</td><td>LLM Arena</td><td>nan</td><td>>32B</td></tr><tr><td>36</td><td>Google</td><td>Gemini 3.1</td><td>Gemini 3.1 pro previw</td><td>nan</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>10.00</td><td>LLM Arena</td><td>nan</td><td>>32B</td></tr><tr><td>37</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 27B</td><td>27.0</td><td>auto</td><td>1.0</td><td>1</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.75</td><td>LLM Arena</td><td>nan</td><td>10-32B</td></tr><tr><td>38</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 30B-A3B</td><td>30.0</td><td>auto</td><td>1.0</td><td>1</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.75</td><td>LLM Arena</td><td>nan</td><td>10-32B</td></tr><tr><td>39</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 122B-A10B</td><td>122.0</td><td>auto</td><td>1.0</td><td>1</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.75</td><td>LLM Arena</td><td>nan</td><td>>32B</td></tr><tr><td>40</td><td>MiniMax</td><td>MiniMax M2.5</td><td>MiniMax M2.5</td><td>229.0</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>0.75</td><td>1.0</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1</td><td>1</td><td>8.75</td><td>LLM Arena</td><td>nan</td><td>>32B</td></tr><tr><td>41</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 27B</td><td>27.0</td><td>fast</td><td>0.0</td><td>1</td><td>1.0</td><td>0.95</td><td>1.0</td><td>1.0</td><td>0.95</td><td>1.0</td><td>1</td><td>1</td><td>8.90</td><td>Qwen Chat</td><td>nan</td><td>10-32B</td></tr><tr><td>42</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 30B-A3B</td><td>30.0</td><td>fast</td><td>1.0</td><td>1</td><td>0.95</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.70</td><td>Qwen Chat</td><td>nan</td><td>10-32B</td></tr><tr><td>43</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 27B</td><td>27.0</td><td>think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.75</td><td>Qwen Chat</td><td>nan</td><td>10-32B</td></tr><tr><td>44</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 30B-A3B</td><td>30.0</td><td>think</td><td>1.0</td><td>1</td><td>0.95</td><td>0.95</td><td>1.0</td><td>0.25</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.15</td><td>Qwen Chat</td><td>nan</td><td>10-32B</td></tr><tr><td>45</td><td>Z.AI</td><td>GLM-5</td><td>GLM-5(754B-A40B)</td><td>754.0</td><td>think</td><td>1.0</td><td>1</td><td>0.95</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.70</td><td>LLM Arena</td><td>nan</td><td>>32B</td></tr><tr><td>46</td><td>MoonshotAI</td><td>kimi2.5</td><td>Kimi2.5-instant(1100B-A32B)</td><td>1100.0</td><td>think</td><td>1.0</td><td>1</td><td>0.95</td><td>0.75</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.70</td><td>LLM Arena</td><td>nan</td><td>>32B</td></tr><tr><td>47</td><td>NVIDIA</td><td>nemotron 3</td><td>nano 4B</td><td>4.0</td><td>think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.1</td><td>1.0</td><td>1.0</td><td>0.5</td><td>0.0</td><td>1</td><td>1</td><td>7.60</td><td>run local</td><td>nan</td><td>≤5B</td></tr><tr><td>48</td><td>NVIDIA</td><td>nemotron 3</td><td>nano 4B</td><td>4.0</td><td>no_think</td><td>0.1</td><td>0</td><td>0.5</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0</td><td>1</td><td>2.60</td><td>run local</td><td>nan</td><td>≤5B</td></tr><tr><td>49</td><td>NVIDIA</td><td>nemotron 3</td><td>super</td><td>120.0</td><td>no_think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.00</td><td>nvidia</td><td>nan</td><td>>32B</td></tr><tr><td>50</td><td>NVIDIA</td><td>nemotron 3</td><td>super low</td><td>120.0</td><td>think</td><td>1.0</td><td>1</td><td>0.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0.5</td><td>1.0</td><td>1</td><td>1</td><td>7.50</td><td>nvidia</td><td>nan</td><td>>32B</td></tr><tr><td>51</td><td>NVIDIA</td><td>nemotron 3</td><td>super high</td><td>120.0</td><td>think</td><td>1.0</td><td>1</td><td>0.0</td><td>0.95</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.95</td><td>nvidia</td><td>nan</td><td>>32B</td></tr><tr><td>52</td><td>NVIDIA</td><td>nemotron 3</td><td>nano 30B</td><td>30.0</td><td>no_think</td><td>0.0</td><td>1</td><td>0.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1</td><td>1</td><td>6.00</td><td>nvidia</td><td>nan</td><td>10-32B</td></tr><tr><td>53</td><td>NVIDIA</td><td>nemotron 3</td><td>nano 30B</td><td>30.0</td><td>think</td><td>0.5</td><td>1</td><td>0.5</td><td>0.1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.10</td><td>nvidia</td><td>nan</td><td>10-32B</td></tr><tr><td>54</td><td>MiniMax</td><td>MiniMax M2.5</td><td>MiniMax M2.7</td><td>nan</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>0.1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.10</td><td>LLM Arena</td><td>nan</td><td>>32B</td></tr><tr><td>55</td><td>Xiaomi</td><td>mimo v2 pro</td><td>mimo v2 pro(1000B-A42B)</td><td>1000.0</td><td>auto</td><td>1.0</td><td>1</td><td>0.95</td><td>0.1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.05</td><td>LLM Arena</td><td>nan</td><td>>32B</td></tr><tr><td>56</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 9B Q4</td><td>9.0</td><td>think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.75</td><td>run local</td><td>nan</td><td>5-10B</td></tr><tr><td>57</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 9B Q6</td><td>9.0</td><td>think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.75</td><td>run local</td><td>nan</td><td>5-10B</td></tr><tr><td>58</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 27B Q4</td><td>27.0</td><td>think</td><td>1.0</td><td>1</td><td>0.95</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.70</td><td>run local</td><td>Q6は実行不可</td><td>10-32B</td></tr><tr><td>59</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 35B-A3B Q4</td><td>35.0</td><td>think</td><td>1.0</td><td>1</td><td>0.95</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.70</td><td>run local</td><td>Q6は実行不可</td><td>>32B</td></tr><tr><td>60</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 9B Q4</td><td>9.0</td><td>no_think</td><td>1.0</td><td>1</td><td>0.8</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.75</td><td>1.0</td><td>1</td><td>1</td><td>7.55</td><td>run local</td><td>use unsol def no think</td><td>5-10B</td></tr><tr><td>61</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 9B Q6</td><td>9.0</td><td>no_think</td><td>1.0</td><td>1</td><td>0.8</td><td>0.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.80</td><td>run local</td><td>use unsol def no think</td><td>5-10B</td></tr><tr><td>62</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 27B Q4</td><td>27.0</td><td>no_think</td><td>1.0</td><td>1</td><td>0.95</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.95</td><td>Googleコラボ</td><td>webui GPU L4/model unsol</td><td>10-32B</td></tr><tr><td>63</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 35B-A3B Q4</td><td>35.0</td><td>no_think</td><td>0.0</td><td>1</td><td>1.0</td><td>0.95</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.95</td><td>run local</td><td>use lmstudio think off</td><td>>32B</td></tr>
+<th>#ID</th><th>comp</th><th>model name</th><th>model</th><th>p size</th><th>mode</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>Q7</th><th>Q8</th><th>Q9</th><th>Q10</th><th>total</th><th>GPU</th><th>Unnamed: 18</th><th>size_class</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>Qwen</td><td>Qwen3</td><td>qwen3-1.7B</td><td>1.7</td><td>no_think</td><td>0.0</td><td>1</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1</td><td>1</td><td>4.00</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>2</td><td>Qwen</td><td>Qwen3</td><td>qwen3-1.7B</td><td>1.7</td><td>think</td><td>0.0</td><td>1</td><td>0.9</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>0.0</td><td>1</td><td>1</td><td>7.80</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>3</td><td>Qwen</td><td>Qwen3</td><td>qwen3-4B</td><td>4.0</td><td>no_think</td><td>1.0</td><td>1</td><td>0.9</td><td>0.75</td><td>1.0</td><td>1.0</td><td>0.9</td><td>0.9</td><td>1</td><td>1</td><td>9.45</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>4</td><td>Qwen</td><td>Qwen3</td><td>qwen3-4B</td><td>4.0</td><td>think</td><td>1.0</td><td>1</td><td>0.9</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>1</td><td>1</td><td>8.90</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>5</td><td>Qwen</td><td>Qwen3</td><td>qwen3-8B</td><td>8.0</td><td>no_think</td><td>0.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>0.0</td><td>1</td><td>1</td><td>7.90</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>6</td><td>Qwen</td><td>Qwen3</td><td>qwen3-8B</td><td>8.0</td><td>think</td><td>0.9</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>0.0</td><td>1</td><td>1</td><td>8.80</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>7</td><td>Qwen</td><td>Qwen3</td><td>qwen3-14B</td><td>14.0</td><td>no_think</td><td>0.0</td><td>1</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.9</td><td>1.0</td><td>1</td><td>1</td><td>6.90</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>8</td><td>Qwen</td><td>Qwen3</td><td>qwen3-14B</td><td>14.0</td><td>think</td><td>1.0</td><td>1</td><td>0.9</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>0.9</td><td>1</td><td>1</td><td>9.70</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>9</td><td>Qwen</td><td>Qwen3</td><td>qwen3-30B-A3B</td><td>30.0</td><td>no_think</td><td>1.0</td><td>1</td><td>0.75</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1</td><td>1</td><td>7.75</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>10</td><td>Qwen</td><td>Qwen3</td><td>qwen3-30B-A3B</td><td>30.0</td><td>think</td><td>0.0</td><td>1</td><td>0.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>0.0</td><td>1</td><td>1</td><td>6.90</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>11</td><td>Qwen</td><td>Qwen3</td><td>qwen3-32B</td><td>32.0</td><td>no_think</td><td>0.0</td><td>1</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1</td><td>1</td><td>7.90</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>12</td><td>Qwen</td><td>Qwen3</td><td>qwen3-32B</td><td>32.0</td><td>think</td><td>1.0</td><td>1</td><td>0.5</td><td>0.9</td><td>1.0</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1</td><td>1</td><td>8.40</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>13</td><td>OpenAI</td><td>GPT-OSS</td><td>GPT-OSS-20B L</td><td>20.0</td><td>low</td><td>1.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.00</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>14</td><td>OpenAI</td><td>GPT-OSS</td><td>GPT-OSS-20B  M</td><td>20.0</td><td>medium</td><td>0.9</td><td>1</td><td>0.25</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.15</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>15</td><td>OpenAI</td><td>GPT-OSS</td><td>GPT-OSS-20B  H</td><td>20.0</td><td>high</td><td>0.0</td><td>1</td><td>0.0</td><td>1.0</td><td>0.9</td><td>0.0</td><td>0.9</td><td>0.0</td><td>1</td><td>1</td><td>5.80</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>16</td><td>Qwen</td><td>Qwen3</td><td>qwen3-4B-inst-2507</td><td>4.0</td><td>no_think</td><td>0.0</td><td>1</td><td>0.9</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1</td><td>1</td><td>8.80</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>17</td><td>Qwen</td><td>Qwen3</td><td>qwen3-4B-think-2507</td><td>4.0</td><td>think</td><td>1.0</td><td>1</td><td>0.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>0.0</td><td>1</td><td>1</td><td>7.90</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>18</td><td>Qwen</td><td>Qwen3</td><td>qwen3-30B-A3B-inst-2507</td><td>30.0</td><td>no_think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1</td><td>1</td><td>8.90</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>19</td><td>Qwen</td><td>Qwen3</td><td>qwen3-30B-A3B-think-2507</td><td>30.0</td><td>think</td><td>1.0</td><td>1</td><td>0.0</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.75</td><td>Googleコラボ</td><td>GPU A100</td><td>軽量</td></tr><tr><td>20</td><td>Qwen</td><td>Qwen3 VL</td><td>qwen3-vl-2b-instruct</td><td>2.0</td><td>no_think</td><td>0.0</td><td>0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>1</td><td>0</td><td>2.00</td><td>run local</td><td>nan</td><td>軽量</td></tr><tr><td>21</td><td>Qwen</td><td>Qwen3 VL</td><td>qwen3-vl-4b-instruct</td><td>4.0</td><td>no_think</td><td>1.0</td><td>1</td><td>0.5</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.9</td><td>0.0</td><td>1</td><td>1</td><td>6.40</td><td>run local</td><td>nan</td><td>軽量</td></tr><tr><td>22</td><td>Qwen</td><td>Qwen3 VL</td><td>qwen3-vl-8b-instruct</td><td>8.0</td><td>no_think</td><td>0.0</td><td>1</td><td>0.9</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>1</td><td>1</td><td>7.65</td><td>run local</td><td>nan</td><td>軽量</td></tr><tr><td>23</td><td>OpenAI</td><td>ChatGPT</td><td>GPT5.2(20260103)</td><td>9999.0</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>0.5</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.50</td><td>ChatGPT</td><td>nan</td><td>フル</td></tr><tr><td>24</td><td>Qwen</td><td>Qwen3</td><td>Qwen3 MAX(20260103)</td><td>9999.0</td><td>none</td><td>0.0</td><td>1</td><td>0.9</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.90</td><td>Qwen Chat</td><td>nan</td><td>フル</td></tr><tr><td>25</td><td>Qwen</td><td>Qwen3 Next</td><td>Qwen3 next 80B-A3B(20260103)</td><td>80.0</td><td>no_think</td><td>0.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.00</td><td>Qwen Chat</td><td>nan</td><td>フル</td></tr><tr><td>26</td><td>Qwen</td><td>Qwen3 Next</td><td>Qwen3 next 80B-A3B(20260103)</td><td>80.0</td><td>think</td><td>1.0</td><td>1</td><td>0.0</td><td>0.25</td><td>1.0</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1</td><td>1</td><td>8.15</td><td>Qwen Chat</td><td>nan</td><td>フル</td></tr><tr><td>27</td><td>Qwen</td><td>Qwen3</td><td>Qwen3 235B-A22B 2507(20260103)</td><td>235.0</td><td>no_think</td><td>0.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1</td><td>1</td><td>8.90</td><td>Qwen Chat</td><td>nan</td><td>フル</td></tr><tr><td>28</td><td>Qwen</td><td>Qwen3 VL</td><td>Qwen3 VL 235B-A22B(20260103)</td><td>235.0</td><td>no_think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.90</td><td>Qwen Chat</td><td>nan</td><td>フル</td></tr><tr><td>29</td><td>Qwen</td><td>Qwen3</td><td>Qwen3 235B-A22B 2507(20260103)</td><td>235.0</td><td>think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1.0</td><td>0.9</td><td>1.0</td><td>1</td><td>1</td><td>9.80</td><td>Qwen Chat</td><td>nan</td><td>フル</td></tr><tr><td>30</td><td>Qwen</td><td>Qwen3 VL</td><td>Qwen3 VL 235B-A22B(20260103)</td><td>235.0</td><td>think</td><td>1.0</td><td>1</td><td>0.9</td><td>0.9</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.80</td><td>Qwen Chat</td><td>nan</td><td>フル</td></tr><tr><td>31</td><td>Anthropic</td><td>Claud opus 4.6</td><td>Claud opus 4.6 think</td><td>9999.0</td><td>think</td><td>1.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>10.00</td><td>LLM Arena</td><td>nan</td><td>フル</td></tr><tr><td>32</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 397B-A17B</td><td>397.0</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>10.00</td><td>LLM Arena</td><td>nan</td><td>フル</td></tr><tr><td>33</td><td>OpenAI</td><td>GPT-OSS</td><td>GPT-OSS-120B</td><td>120.0</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>0.0</td><td>0.5</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.50</td><td>LLM Arena</td><td>nan</td><td>フル</td></tr><tr><td>34</td><td>Anthropic</td><td>Claud sonet 4.6</td><td>Claude sonet 4.6</td><td>9999.0</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>10.00</td><td>LLM Arena</td><td>nan</td><td>フル</td></tr><tr><td>35</td><td>Google</td><td>Gemini 3</td><td>Gemini 3 pro</td><td>9999.0</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>10.00</td><td>LLM Arena</td><td>nan</td><td>フル</td></tr><tr><td>36</td><td>Google</td><td>Gemini 3.1</td><td>Gemini 3.1 pro previw</td><td>9999.0</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>10.00</td><td>LLM Arena</td><td>nan</td><td>フル</td></tr><tr><td>37</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 27B</td><td>27.0</td><td>auto</td><td>1.0</td><td>1</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.75</td><td>LLM Arena</td><td>nan</td><td>軽量</td></tr><tr><td>38</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 30B-A3B</td><td>30.0</td><td>auto</td><td>1.0</td><td>1</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.75</td><td>LLM Arena</td><td>nan</td><td>軽量</td></tr><tr><td>39</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 122B-A10B</td><td>122.0</td><td>auto</td><td>1.0</td><td>1</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.75</td><td>LLM Arena</td><td>nan</td><td>フル</td></tr><tr><td>40</td><td>MiniMax</td><td>MiniMax M2.5</td><td>MiniMax M2.5</td><td>229.0</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>0.75</td><td>1.0</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1</td><td>1</td><td>8.75</td><td>LLM Arena</td><td>nan</td><td>フル</td></tr><tr><td>41</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 27B</td><td>27.0</td><td>fast</td><td>0.0</td><td>1</td><td>1.0</td><td>0.95</td><td>1.0</td><td>1.0</td><td>0.95</td><td>1.0</td><td>1</td><td>1</td><td>8.90</td><td>Qwen Chat</td><td>nan</td><td>軽量</td></tr><tr><td>42</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 30B-A3B</td><td>30.0</td><td>fast</td><td>1.0</td><td>1</td><td>0.95</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.70</td><td>Qwen Chat</td><td>nan</td><td>軽量</td></tr><tr><td>43</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 27B</td><td>27.0</td><td>think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.75</td><td>Qwen Chat</td><td>nan</td><td>軽量</td></tr><tr><td>44</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 30B-A3B</td><td>30.0</td><td>think</td><td>1.0</td><td>1</td><td>0.95</td><td>0.95</td><td>1.0</td><td>0.25</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.15</td><td>Qwen Chat</td><td>nan</td><td>軽量</td></tr><tr><td>45</td><td>Z.AI</td><td>GLM-5</td><td>GLM-5(754B-A40B)</td><td>754.0</td><td>think</td><td>1.0</td><td>1</td><td>0.95</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.70</td><td>LLM Arena</td><td>nan</td><td>フル</td></tr><tr><td>46</td><td>MoonshotAI</td><td>kimi2.5</td><td>Kimi2.5-instant(1100B-A32B)</td><td>1100.0</td><td>think</td><td>1.0</td><td>1</td><td>0.95</td><td>0.75</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.70</td><td>LLM Arena</td><td>nan</td><td>フル</td></tr><tr><td>47</td><td>NVIDIA</td><td>nemotron 3</td><td>nano 4B</td><td>4.0</td><td>think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.1</td><td>1.0</td><td>1.0</td><td>0.5</td><td>0.0</td><td>1</td><td>1</td><td>7.60</td><td>run local</td><td>nan</td><td>軽量</td></tr><tr><td>48</td><td>NVIDIA</td><td>nemotron 3</td><td>nano 4B</td><td>4.0</td><td>no_think</td><td>0.1</td><td>0</td><td>0.5</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0</td><td>1</td><td>2.60</td><td>run local</td><td>nan</td><td>軽量</td></tr><tr><td>49</td><td>NVIDIA</td><td>nemotron 3</td><td>super</td><td>120.0</td><td>no_think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.00</td><td>nvidia</td><td>nan</td><td>フル</td></tr><tr><td>50</td><td>NVIDIA</td><td>nemotron 3</td><td>super low</td><td>120.0</td><td>think</td><td>1.0</td><td>1</td><td>0.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0.5</td><td>1.0</td><td>1</td><td>1</td><td>7.50</td><td>nvidia</td><td>nan</td><td>フル</td></tr><tr><td>51</td><td>NVIDIA</td><td>nemotron 3</td><td>super high</td><td>120.0</td><td>think</td><td>1.0</td><td>1</td><td>0.0</td><td>0.95</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.95</td><td>nvidia</td><td>nan</td><td>フル</td></tr><tr><td>52</td><td>NVIDIA</td><td>nemotron 3</td><td>nano 30B</td><td>30.0</td><td>no_think</td><td>0.0</td><td>1</td><td>0.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>1.0</td><td>1</td><td>1</td><td>6.00</td><td>nvidia</td><td>nan</td><td>軽量</td></tr><tr><td>53</td><td>NVIDIA</td><td>nemotron 3</td><td>nano 30B</td><td>30.0</td><td>think</td><td>0.5</td><td>1</td><td>0.5</td><td>0.1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.10</td><td>nvidia</td><td>nan</td><td>軽量</td></tr><tr><td>54</td><td>MiniMax</td><td>MiniMax M2.5</td><td>MiniMax M2.7</td><td>9999.0</td><td>auto</td><td>1.0</td><td>1</td><td>1.0</td><td>0.1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.10</td><td>LLM Arena</td><td>nan</td><td>フル</td></tr><tr><td>55</td><td>Xiaomi</td><td>mimo v2 pro</td><td>mimo v2 pro(1000B-A42B)</td><td>1000.0</td><td>auto</td><td>1.0</td><td>1</td><td>0.95</td><td>0.1</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.05</td><td>LLM Arena</td><td>nan</td><td>フル</td></tr><tr><td>56</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 9B Q4</td><td>9.0</td><td>think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.75</td><td>run local</td><td>nan</td><td>軽量</td></tr><tr><td>57</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 9B Q6</td><td>9.0</td><td>think</td><td>1.0</td><td>1</td><td>1.0</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.75</td><td>run local</td><td>nan</td><td>軽量</td></tr><tr><td>58</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 27B Q4</td><td>27.0</td><td>think</td><td>1.0</td><td>1</td><td>0.95</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.70</td><td>run local</td><td>Q6は実行不可</td><td>軽量</td></tr><tr><td>59</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 35B-A3B Q4</td><td>35.0</td><td>think</td><td>1.0</td><td>1</td><td>0.95</td><td>0.75</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.70</td><td>run local</td><td>Q6は実行不可</td><td>軽量</td></tr><tr><td>60</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 9B Q4</td><td>9.0</td><td>no_think</td><td>1.0</td><td>1</td><td>0.8</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.75</td><td>1.0</td><td>1</td><td>1</td><td>7.55</td><td>run local</td><td>use unsol def no think</td><td>軽量</td></tr><tr><td>61</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 9B Q6</td><td>9.0</td><td>no_think</td><td>1.0</td><td>1</td><td>0.8</td><td>0.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.80</td><td>run local</td><td>use unsol def no think</td><td>軽量</td></tr><tr><td>62</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 27B Q4</td><td>27.0</td><td>no_think</td><td>1.0</td><td>1</td><td>0.95</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>9.95</td><td>Googleコラボ</td><td>webui GPU L4/model unsol</td><td>軽量</td></tr><tr><td>63</td><td>Qwen</td><td>Qwen3.5</td><td>Qwen3.5 35B-A3B Q4</td><td>35.0</td><td>no_think</td><td>0.0</td><td>1</td><td>1.0</td><td>0.95</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1</td><td>1</td><td>8.95</td><td>run local</td><td>use lmstudio think off</td><td>軽量</td></tr><tr><td>64</td><td>NVIDIA</td><td>nemotron 3</td><td>Cascade 2 30B A3B 4bit 4BIT</td><td>30.0</td><td>think</td><td>0.0</td><td>1</td><td>0.95</td><td>0.5</td><td>1.0</td><td>1.0</td><td>0.5</td><td>1.0</td><td>1</td><td>1</td><td>7.95</td><td>run local</td><td>Lmstudio</td><td>軽量</td></tr>
 </tbody>
 </table>
+
 </div>
 </div>
 
 <script>
+
+const colIndex = {'#ID': 0, 'comp': 1, 'model name': 2, 'model': 3, 'p size': 4, 'mode': 5, 'Q1': 6, 'Q2': 7, 'Q3': 8, 'Q4': 9, 'Q5': 10, 'Q6': 11, 'Q7': 12, 'Q8': 13, 'Q9': 14, 'Q10': 15, 'total': 16, 'GPU': 17, 'Unnamed: 18': 18, 'size_class': 19};
 let currentMode = "model";
 
 function setMode(mode){
     currentMode = mode;
-    document.getElementById("modelFilters").classList.add("hidden");
-    document.getElementById("gpuFilters").classList.add("hidden");
-    document.getElementById("sizeFilters").classList.add("hidden");
 
-    if(mode==="model") document.getElementById("modelFilters").classList.remove("hidden");
-    if(mode==="gpu") document.getElementById("gpuFilters").classList.remove("hidden");
-    if(mode==="size") document.getElementById("sizeFilters").classList.remove("hidden");
+    document.getElementById("modelUI").classList.add("hidden");
+    document.getElementById("companyUI").classList.add("hidden");
+    document.getElementById("sizeUI").classList.add("hidden");
+
+    if(mode==="model") document.getElementById("modelUI").classList.remove("hidden");
+    if(mode==="company") document.getElementById("companyUI").classList.remove("hidden");
+    if(mode==="size") document.getElementById("sizeUI").classList.remove("hidden");
 
     filterTable();
 }
@@ -121,109 +135,109 @@ function setMode(mode){
 function filterTable(){
     const rows = document.querySelectorAll("#dataTable tbody tr");
 
-    rows.forEach(row=>{
-        const comp = row.cells[1].textContent;
-        const family = row.cells[2].textContent;
-        const model = row.cells[3].textContent;
-        const gpu = row.cells[row.cells.length-2].textContent;
-        const size = row.cells[row.cells.length-1].textContent;
+    rows.forEach(function(row){
+        const modelname = row.cells[colIndex["model name"]].textContent;
+        const comp = row.cells[colIndex["comp"]].textContent;
+        const size = row.cells[colIndex["size_class"]].textContent;
 
         let show = false;
 
         if(currentMode==="model"){
-            const compChecked = Array.from(document.querySelectorAll('.compFilter:checked')).map(el=>el.value);
-            const famChecked = Array.from(document.querySelectorAll('.familyFilter:checked')).map(el=>el.value);
-            const modelChecked = Array.from(document.querySelectorAll('.modelFilter:checked')).map(el=>el.value);
-            show = compChecked.includes(comp) && famChecked.includes(family) && modelChecked.includes(model);
+            const checked = Array.from(document.querySelectorAll('.modelFilter:checked')).map(el=>el.value);
+            show = checked.includes(modelname);
         }
 
-        if(currentMode==="gpu"){
-            const gpuChecked = Array.from(document.querySelectorAll('.gpuFilter:checked')).map(el=>el.value);
-            show = gpuChecked.includes(gpu);
+        if(currentMode==="company"){
+            const checked = Array.from(document.querySelectorAll('.compFilter:checked')).map(el=>el.value);
+            show = checked.includes(comp);
         }
 
         if(currentMode==="size"){
-            const sizeChecked = Array.from(document.querySelectorAll('.sizeFilter:checked')).map(el=>el.value);
-            show = sizeChecked.includes(size);
+            const checked = Array.from(document.querySelectorAll('.sizeFilter:checked')).map(el=>el.value);
+            show = checked.includes(size);
         }
 
         row.style.display = show ? "" : "none";
     });
 }
 
-document.querySelectorAll('input').forEach(el=>{
+document.querySelectorAll('input').forEach(function(el){
     el.addEventListener('change', filterTable);
 });
 
-// ===== 全選択／全解除 =====
-function selectAll(){
-    if(currentMode==="model"){
-        document.querySelectorAll('.compFilter, .familyFilter, .modelFilter').forEach(el=>el.checked=true);
-    }
-    if(currentMode==="gpu"){
-        document.querySelectorAll('.gpuFilter').forEach(el=>el.checked=true);
-    }
-    if(currentMode==="size"){
-        document.querySelectorAll('.sizeFilter').forEach(el=>el.checked=true);
-    }
+// ===== モデル操作 =====
+function selectAllModel(){
+    document.querySelectorAll('.modelFilter').forEach(el=>el.checked=true);
     filterTable();
 }
 
-function clearAll(){
-    if(currentMode==="model"){
-        document.querySelectorAll('.compFilter, .familyFilter, .modelFilter').forEach(el=>el.checked=false);
-    }
-    if(currentMode==="gpu"){
-        document.querySelectorAll('.gpuFilter').forEach(el=>el.checked=false);
-    }
-    if(currentMode==="size"){
-        document.querySelectorAll('.sizeFilter').forEach(el=>el.checked=false);
-    }
+function clearAllModel(){
+    document.querySelectorAll('.modelFilter').forEach(el=>el.checked=false);
     filterTable();
 }
 
-// ===== 表示行のみTotalでソート =====
-function sortByTotal(){
+// ===== 会社操作 =====
+function selectAllCompany(){
+    document.querySelectorAll('.compFilter').forEach(el=>el.checked=true);
+    filterTable();
+}
+
+function clearAllCompany(){
+    document.querySelectorAll('.compFilter').forEach(el=>el.checked=false);
+    filterTable();
+}
+
+// ===== ソート =====
+function sortTable(index, desc=true){
     const table = document.getElementById("dataTable");
     const tbody = table.tBodies[0];
-    const allRows = Array.from(tbody.rows);
+    const rows = Array.from(tbody.rows);
 
-    const headers = Array.from(table.tHead.rows[0].cells);
-    const totalIndex = headers.findIndex(th => th.textContent.trim().toLowerCase() === "total");
-
-    const visibleRows = allRows.filter(r => r.style.display !== "none");
-
-    visibleRows.sort((a,b)=>{
-        const aVal = parseFloat(a.cells[totalIndex].textContent) || 0;
-        const bVal = parseFloat(b.cells[totalIndex].textContent) || 0;
-        return bVal - aVal;
+    rows.sort(function(a,b){
+        let aVal = parseFloat(a.cells[index].textContent) || 0;
+        let bVal = parseFloat(b.cells[index].textContent) || 0;
+        return desc ? bVal - aVal : aVal - bVal;
     });
 
-    visibleRows.forEach(r => tbody.appendChild(r));
+    rows.forEach(r => tbody.appendChild(r));
 }
 
-// ===== CSVダウンロード（BOM付きUTF-8）=====
+function sortByTotalDesc(){
+    sortTable(colIndex["total"], true);
+}
+
+function sortByTotalAsc(){
+    sortTable(colIndex["total"], false);
+}
+
+function sortBySizeDesc(){
+    sortTable(colIndex["p size"], true);
+}
+
+function sortBySizeAsc(){
+    sortTable(colIndex["p size"], false);
+}
+
+// ===== CSV =====
 function downloadCSV(){
     let csv = [];
     const rows = document.querySelectorAll("#dataTable tr");
 
-    rows.forEach(row=>{
-        if(row.style.display === "none") return;
-        let cols = row.querySelectorAll("th, td");
-        let rowData = [];
-        cols.forEach(col=> rowData.push(col.innerText));
-        csv.push(rowData.join(","));
+    rows.forEach(function(row){
+        if(row.style.display==="none") return;
+        let cols = row.querySelectorAll("th,td");
+        csv.push(Array.from(cols).map(c=>c.innerText).join(","));
     });
 
-    const bom = "\ufeff";
-    const blob = new Blob([bom + csv.join("\n")], {type:"text/csv;charset=utf-8;"});
+    const blob = new Blob(["\ufeff"+csv.join("\n")], {type:"text/csv"});
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "filtered_results.csv";
+    a.download = "result.csv";
     a.click();
 }
 
 filterTable();
+
 </script>
 
 </body>
