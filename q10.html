@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM テスト問題ツール</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN",
+                     "Hiragino Sans", Meiryo, sans-serif;
+        margin: 0;
+        background: #f5f7fa;
+        color: #222;
+    }
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 20px 50px;
+    }
+    h1 {
+        margin: 0 0 25px;
+        font-size: 28px;
+    }
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    button {
+        border: none;
+        border-radius: 8px;
+        padding: 12px 24px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .nav button {
+        background: #555;
+        color: white;
+        min-width: 160px;
+    }
+    .nav button:hover { background: #333; }
+    .nav button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+    }
+    .number {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 12px;
+    }
+    .type {
+        display: inline-block;
+        background: #e8f0fe;
+        color: #1967d2;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    .card {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        margin-bottom: 20px;
+    }
+    .question {
+        font-size: 18px;
+        line-height: 1.8;
+        white-space: pre-wrap;
+        margin-bottom: 20px;
+    }
+    .copy-area {
+        text-align: center;
+    }
+    .copy {
+        background: #2196F3;
+        color: white;
+        font-size: 18px;
+        padding: 12px 30px;
+    }
+    .copy:hover { background: #1976D2; }
+    .copy.copied { background: #4CAF50; }
+    .choices {
+        margin-top: 15px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        line-height: 1.8;
+    }
+    .answer-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .answer {
+        font-size: 19px;
+        line-height: 1.7;
+        background: #fff8e1;
+        border-left: 5px solid #ffb300;
+        padding: 15px;
+        border-radius: 5px;
+    }
+    .footer {
+        text-align: center;
+        color: #777;
+        margin-top: 25px;
+        font-size: 13px;
+    }
+</style>
+</head>
+
+<body>
+<div class="container">
+    <h1>LLM テスト問題ツール</h1>
+
+    <div class="nav">
+        <button id="prevBtn" onclick="prevQuestion()">← 前の問題</button>
+        <button id="nextBtn" onclick="nextQuestion()">次の問題 →</button>
+    </div>
+
+    <div class="number" id="number"></div>
+    <div id="type"></div>
+
+    <div class="card">
+        <div class="question" id="question"></div>
+
+        <div id="choices"></div>
+
+        <div class="copy-area">
+            <button class="copy" id="copyBtn" onclick="copyQuestion()">問題をコピー</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="answer-title">正解</div>
+        <div class="answer" id="answer"></div>
+    </div>
+
+    <div class="footer">
+        ← → キーでも問題を移動できます
+    </div>
+</div>
+
+<script>
+const data = [
+  {
+    "id": 1,
+    "type": "時系列推論",
+    "question": "O、P、Q、R、Sさん5人は高校の同級生です。10年ぶりに同窓会を行うため、集合場所を駅前としました。約束した集合時間は18時でした。当日、Oは家に忘れ物を取りに帰ったため5分遅れました。Pは遅れそうになりましたが、最後は走ってギリギリ集合時刻に間に合いました。SはOが着く直前に到着しました。Qは早めに出発し、全員が揃うまで40分待ちました。Rは、Pくんを20分待たせてしまったと謝りました。この5人はどういう順番で駅に着いたでしょうか？",
+    "answer": "Q,P,S,O,R"
+  },
+  {
+    "id": 2,
+    "type": "順位推論",
+    "question": "Aさん、Bさん、Cさん、Dさんの4人が同じテストを受けました。Aさんの点数はBさんより高い。Bさんの点数はCさんより高い。Dさんの点数はCさんより高い。Dさんの点数はAさんより高い。このとき、4人の中で2番目に点数が高いのはだれですか。",
+    "answer": "Aさん　D → A → B → C"
+  },
+  {
+    "id": 3,
+    "type": "矛盾（数量）",
+    "question": "0.28 kg の本 7 冊と 0.84 kg の国語辞典 8 冊を箱に入れてはかったところ，全体の重さは 8.5 kg であった。箱の重さはいくつ？",
+    "answer": "本だけでオーバしているのでありえない。"
+  },
+  {
+    "id": 4,
+    "type": "矛盾（表記体系）",
+    "question": "4進法で表された数 1234 を10進法で表しなさい。",
+    "answer": "ありえない（４は４進法では存在しない）"
+  },
+  {
+    "id": 5,
+    "type": "割引計算（条件除外）",
+    "question": "今日はスーパーの割引セール日で、酒・たばこ以外はすべて５％引きになります。価格はすべて税込み表示で、消費税は含まれているものとします。お弁当を400円、おかずを250円、サラダを150円、そしてビールを200円で購入しました。全部でいくらでしょうか？",
+    "answer": "960"
+  },
+  {
+    "id": 6,
+    "type": "割引計算（例外差異）",
+    "question": "今日はスーパーの割引セール日で、酒・たばこ以外はすべて５％引きになります。価格はすべて税込み表示で、消費税は含まれているものとします。お弁当を400円、おかずを250円、サラダを150円、そしてノンアルコールビールを200円で購入しました。全部でいくらでしょうか？",
+    "answer": "950"
+  },
+  {
+    "id": 7,
+    "type": "方角推論",
+    "question": "Aさんの家はBさんの家の東にあります。Cさんの家はBさんの家の南にあります。Aさんの家から見て、Cさんの家はどの方角にありますか。",
+    "answer": "南西"
+  },
+  {
+    "id": 8,
+    "type": "料金体系（時間帯/最大料金）",
+    "question": "このコインパーキングは以下のような料金体系です。24時間ごと 最大料金 1,400円、8:00〜22:00 20分／330円、22:00〜8:00 60分／110円。このコインパーキングに10時入庫で24時に出庫した場合の料金はいくら？",
+    "answer": "1400円"
+  },
+  {
+    "id": 9,
+    "type": "数量推論（文章→式）",
+    "question": "AはBより3個多く、CはAより2個少なく、DはCより1個多い。4人の合計は22個である。このとき、Bの個数はいくつか。",
+    "answer": "B = 4"
+  },
+  {
+    "id": 10,
+    "type": "常識判断",
+    "question": "最初に示された2つの語句の関係と同じ関係になるように、（　）にあてはまる語句をA～Eの中から1つ選びなさい。　日本：東京　イタリア：（　）　A パリ, B ローマ, C 大阪, D ミラノ, E ベルリン",
+    "choices": [
+      "A パリ",
+      "B ローマ",
+      "C 大阪",
+      "D ミラノ",
+      "E ベルリン"
+    ],
+    "answer": "B"
+  }
+];
+
+let index = 0;
+
+function showQuestion() {
+    const q = data[index];
+
+    document.getElementById("number").textContent =
+        `問題 ${index + 1} / ${data.length}`;
+
+    document.getElementById("type").textContent = q.type;
+    document.getElementById("type").className = "type";
+
+    document.getElementById("question").textContent = q.question;
+    document.getElementById("answer").textContent = q.answer;
+
+    const choices = document.getElementById("choices");
+
+    if (q.choices) {
+        choices.innerHTML =
+            '<div class="choices">' +
+            q.choices.map(c => escapeHtml(c)).join("<br>") +
+            '</div>';
+    } else {
+        choices.innerHTML = "";
+    }
+
+    document.getElementById("prevBtn").disabled = index === 0;
+    document.getElementById("nextBtn").disabled = index === data.length - 1;
+
+    const copyBtn = document.getElementById("copyBtn");
+    copyBtn.textContent = "問題をコピー";
+    copyBtn.classList.remove("copied");
+}
+
+function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function copyQuestion() {
+    const question = data[index].question;
+
+    navigator.clipboard.writeText(question).then(() => {
+        const btn = document.getElementById("copyBtn");
+        btn.textContent = "コピーしました";
+        btn.classList.add("copied");
+
+        setTimeout(() => {
+            btn.textContent = "問題をコピー";
+            btn.classList.remove("copied");
+        }, 1500);
+    }).catch(() => {
+        // clipboard APIが使えない環境向け
+        const textarea = document.createElement("textarea");
+        textarea.value = question;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+
+        const btn = document.getElementById("copyBtn");
+        btn.textContent = "コピーしました";
+        btn.classList.add("copied");
+
+        setTimeout(() => {
+            btn.textContent = "問題をコピー";
+            btn.classList.remove("copied");
+        }, 1500);
+    });
+}
+
+function prevQuestion() {
+    if (index > 0) {
+        index--;
+        showQuestion();
+        window.scrollTo(0, 0);
+    }
+}
+
+function nextQuestion() {
+    if (index < data.length - 1) {
+        index++;
+        showQuestion();
+        window.scrollTo(0, 0);
+    }
+}
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "ArrowLeft") {
+        prevQuestion();
+    } else if (event.key === "ArrowRight") {
+        nextQuestion();
+    }
+});
+
+showQuestion();
+</script>
+</body>
+</html>
